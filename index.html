@@ -1,0 +1,1840 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M. Guadalupe Salva</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+   
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+    background:#f2f3f6;
+    font-family:'Inter',sans-serif;
+    color:#444;
+    line-height:1.7;
+    max-width:900px;
+    margin:auto;
+    padding:20px;
+}
+
+/* HEADER */
+.header{
+    background:linear-gradient(135deg,
+        #f5f6fa 0%,
+        #e6e9f1 100%
+    );
+    padding:2.4rem 2rem;
+    border-radius:20px;
+
+    box-shadow:
+        0 14px 34px rgba(0,0,0,.20),
+        inset 0 1px 0 rgba(255,255,255,.75);
+        display:flex;
+    justify-content:center;
+
+    animation:fadeUp .8s ease-out both;
+}
+
+
+.header-text p:not(.title){
+    font-size:0.95rem;
+    color:#555;
+    max-width:520px;
+}
+
+    
+.header-inner{
+    display:flex;
+    align-items:center;
+    gap:2rem;
+    max-width:700px;
+    padding:0.5rem;
+}
+
+
+.profile-img{
+    height:100%;
+    width:160px;
+    border-radius:14px; /* deja de ser circular, más profesional */
+    object-fit:cover;
+    box-shadow:0 6px 18px rgba(0,0,0,.15);
+}
+
+.header-text{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    text-align:left;
+}    
+
+.name{
+    font-family:'Playfair Display',serif;
+    font-size:2.15rem;
+    font-weight:700;
+    color:#1f1f1f;
+    letter-spacing:0.4px;
+    line-height:1.15;
+}
+
+.intro-text{
+    margin-top:0.6rem;
+    font-size:0.95rem;
+    color:#4b4b4b;
+    line-height:1.6;
+}
+
+.intro-text span{
+    font-weight:500;
+    color:#3f4f8f;
+}
+
+
+.title{
+    margin:0.7rem 0 1.1rem;
+}
+
+.title .role{
+    font-size:1rem;
+    font-weight:500;
+    color:#2d2d2d;
+}
+
+.title .degree{
+    font-size:0.95rem;
+    font-weight:400;
+    color:#3f5ed7;
+}
+
+.role{
+    display:inline-flex;
+    align-items:center;
+    gap:0.45rem;
+}
+
+.role-icon{
+    font-size:0.85rem;
+    margin-right:6px;
+    color:#3f4f8f;
+    opacity:0.75;
+}
+
+.role:hover .role-icon{
+    transform:translateY(-1px);
+}
+
+/* SECTIONS */
+.section{
+    background:#f7f8fb;
+    margin-top:2rem;
+    padding:1rem;
+    border-radius:16px;
+    box-shadow:0 6px 22px rgba(0,0,0,.05);
+}
+.section h2{
+    font-family:'Playfair Display',serif;
+    margin: 1 auto 1.8rem;
+    font-size:1.5rem;
+    margin-bottom:1.2rem;
+    color:#2d2d2d;
+}
+    
+.section p{
+    margin: 0 auto 1.6rem;    
+    text-align:left;
+}
+
+.section p span{
+    font-weight:500;
+    color:#2f3b8f;
+}
+
+.contact-grid{
+  display:grid;
+  gap:1.4rem;
+  margin-top:1.2rem;
+}
+    
+.contact-card{
+  border-radius:14px;
+  padding:1.2rem;
+  background:#e6e8ed;
+  border:1px solid #d5d8e0;
+  text-align:center;
+  transition:.25s ease;
+}
+
+.contact-card.primary{
+  background:#eceef3;
+  opacity:0.95;
+}
+    
+.contact-card:hover{
+  box-shadow:0 8px 20px rgba(0,0,0,.08);
+  transform:translateY(-2px);
+}
+
+.contact-card i{
+  font-size:1.5rem;
+  color:#5a5f73;
+  margin-bottom:.6rem;
+}
+    
+.contact-card h3{
+  font-size:.95rem;
+  font-weight:500;
+  color:#2b2b2b;
+}
+    
+.contact-card p{
+  font-size:0.9rem;
+  color:#666;
+  text-align: center;
+  margin-bottom:0.9rem;
+}
+
+.contact-card button,
+.contact-card .btn-link{
+  background:none;
+  border:none;
+  color:#3f5ed7;
+  font-weight:600;
+  cursor:pointer;
+  text-decoration:none;
+}
+
+.contact-card button:hover,
+.contact-card .btn-link:hover{
+  text-decoration:underline;
+}
+    
+.contact-list{
+    font-size:0.88rem;
+    color:#6a6a6a;
+    gap:0.35rem;
+}
+
+.contact-item{
+    display:grid;
+    grid-template-columns:18px auto;
+    column-gap:12px;   /* ← separación real */
+    align-items:center;
+}
+
+
+.contact-item i{
+    font-size:0.85rem;
+    color:#5b6fd6;
+}
+
+    
+/* AREAS */
+.practice-areas{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    max-width:620px;
+    gap:0.75rem;
+    margin-top:0.6rem;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.payment-modal-content {
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Botón de Mercado Pago estilo oficial */
+.mp-button {
+    background: linear-gradient(90deg, #009ee3 0%, #0077b6 100%);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s;
+    text-decoration: none;
+}
+
+.mp-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 158, 227, 0.3);
+}
+
+.area{
+    background:#e3e6f3;
+    padding:0.65rem 1rem;
+    font-size:0.9rem;
+    border-radius:9px;
+    font-weight:500;
+    text-align:center;
+    color:#2d2d2d;
+
+    box-shadow:0 4px 12px rgba(0,0,0,0.05);
+    transition:transform .15s ease, box-shadow .15s ease;
+}
+
+.area:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 18px rgba(0,0,0,0.08);
+}
+
+/* ACTIONS */
+.actions{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:1.5rem;
+    margin-top:1.2rem;
+}
+.action-card{
+    background:#dde2f5;
+    padding:1.6rem;
+    border-radius:14px;
+    text-align:center;
+    box-shadow:0 6px 18px rgba(0,0,0,.06);    
+
+    display:grid;
+    grid-template-rows:
+        auto    /* título */
+        auto    /* texto */
+        1fr     /* espacio flexible */
+        auto    /* botón */
+        auto;   /* footer */
+}
+
+.action-footer{
+    min-height:80px; /* reserva espacio uniforme */
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+}
+
+.action-card h3{
+    font-family:'Playfair Display',serif;
+    margin-bottom:0.6rem;
+}
+.action-card p{
+    font-size:0.95rem;
+    color:#666;
+}
+.action-link{
+    display:inline-flex;
+    gap:0.5rem;
+    align-items:center;
+    justify-content:center;
+
+    text-decoration:none;
+    font-weight:600;
+    font-size:0.95rem;
+
+    color:#3f5ed7;
+    padding:0.3rem 0;
+
+    transition:color .2s ease;
+}
+
+.action-link:hover{
+    color:#2f4fc0;
+    text-decoration:underline;
+}
+    
+.action-card a{
+    color:#4a63c7;
+    text-decoration:none;
+    font-weight:500;
+}
+
+.action-card a:hover{
+    text-decoration:underline;
+}
+
+.action-card i{
+    margin-right:6px;
+    color:#5b6fd6;
+}
+
+.action-footer{
+    border-top:1px solid rgba(0,0,0,0.06);
+    margin-top:1rem;
+    padding-top:0.6rem;
+}
+    
+.contact-card.highlight{
+  background:#f7f8fb;
+  border:1px solid #cfd4e6;
+}
+
+.contact-card.highlight i{
+  color:#3f4f8f;
+}
+
+.contact-card.highlight h3{
+  font-size:1.05rem;
+}
+ 
+.btn-primary{
+  display:inline-block;
+  background:#3f4f8f;
+  color:#fff;
+  padding:0.45rem 0.9rem;
+  border-radius:6px;
+  font-weight:400;
+  font-size:0.9rem;
+  text-decoration:none;
+}
+
+.btn-primary:hover{
+  background:#2f3f75;
+}
+    
+.location-info{
+    margin-top:0.8rem;
+    font-size:0.8rem;
+    color:#444;
+    min-height:48px; /* ← reserva espacio igual en todas */
+}
+
+.location-info div{
+    display:flex;
+    align-items:flex-start;
+    justify-content:flex-start;
+    gap:6px;
+    margin-top:4px;
+    text-align:left;
+}
+
+.location-info i{
+    color:#444;
+    font-size:0.8rem;
+}
+
+.location-info a{
+    color:#444;
+    text-decoration:none;
+}
+
+.location-info a:hover{
+    text-decoration:underline;
+}    
+    
+.section.soft{
+  background:#f3f4f8;
+}
+    
+#schedule{
+    color:#000;
+    font-weight:400;
+}
+
+
+/* FOOTER */
+.footer{
+    text-align:center;
+    margin-top:3rem;
+    padding:2rem;
+    font-size:0.9rem;
+    color:#777;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(12px);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+.appointment-buttons{
+  display:flex;
+  gap:1rem;
+  flex-wrap:wrap;
+}
+
+.appointment-buttons button{
+  flex:1;
+  padding:.9rem 1.1rem;
+  border-radius:12px;
+  border:none;
+  background:#3f5ed7;
+  color:#fff;
+  font-weight:500;
+  cursor:pointer;
+}
+
+/* Botones de citas - FONDO AZUL */
+.contact-card.highlight button.btn-primary {
+    background: #3f4f8f;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.8rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    width: auto;
+    min-width: 220px;
+    max-width: 280px;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+    box-shadow: 0 4px 12px rgba(63, 79, 143, 0.25);
+    display: inline-block;
+}
+
+.contact-card.highlight button.btn-primary:hover {
+    background: #2f3f75;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(63, 79, 143, 0.35);
+}
+    
+.appointment-buttons button:hover{
+  background:#2f4fc0;
+}
+
+.calendly-inline-widget iframe {
+    width: 100% !important;
+    height: 100% !important;
+}
+    
+.calendly-wrapper {
+    width: 100%;
+    margin: 2rem 0;
+    display: none;
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+}
+ 
+.calendly-inline-widget {
+    width: 100% !important;
+    min-height: 900px !important;
+    height: 900px !important;
+}
+    
+/* Asegurar que todos los elementos internos respeten la altura */
+.calendly-inline-widget > div,
+.calendly-inline-widget .calendly-popup-content,
+.calendly-inline-widget .calendly-spinner {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    max-height: none !important;
+}
+
+    
+/* Ajustes responsive */
+@media (max-width: 768px) {
+    .calendly-inline-widget {
+        min-height: 900px !important;
+        height: 900px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .calendly-inline-widget {
+        min-height: 950px !important;
+        height: 950px !important;
+    }
+}
+
+    /* Para pantallas muy grandes */
+@media (min-height: 900px) {
+    .calendly-inline-widget {
+        min-height: 700px !important;
+        height: 700px !important;
+    }
+}
+
+/* Para móviles en posición horizontal */
+@media (max-width: 768px) and (orientation: landscape) {
+    .calendly-inline-widget {
+        min-height: 90vh !important;
+        height: 90vh !important;
+    }
+}
+    
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: none; }
+}
+    
+/* Desktop */
+@media (min-width: 900px){
+  .contact-grid{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+    
+/* Mobile */
+@media (max-width: 899px){
+  .contact-grid{
+    grid-template-columns: 1fr;
+  }
+}    
+    
+/* RESPONSIVE */
+@media (max-width:600px){
+    .header-inner{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-img{
+        width:150px;
+        height:190px;
+        margin-bottom:1rem;
+    }
+
+    .header-text{
+        text-align: left;  
+        max-width: 420px;  
+        width: 100%;
+    }
+
+    .calendly-inline-widget iframe{
+    height:650px !important;
+    min-height:650px !important;
+    }
+    
+    .contact-card.highlight{
+        padding:1.4rem;
+    }
+
+    .contact-card.highlight a{
+        display:inline-block;
+        margin-top:0.4rem;
+    }
+    .contact-list{
+        justify-content: center;
+    }
+
+    .practice-areas{
+        grid-template-columns:1fr;
+    }
+
+    area{
+        font-size:0.95rem;
+        padding:0.9rem 1rem;
+    }
+    
+    .legal-icon{
+        font-size:1rem;
+    }
+
+    .name{
+        text-align: center;    
+        font-size:1.85rem;
+        margin-bottom:0.4rem;
+    }
+    
+    .title{
+        margin:0.6rem 0 0.9rem;
+    }
+
+    .title .role,
+    .title .degree{
+        display:block;
+        text-align:left;       
+    }
+    
+    .header-text p:not(.title){
+        font-size:0.92rem;
+    }
+    
+    .intro-text{
+        text-align:left;
+        font-size:0.93rem;
+        line-height:1.65;
+    }
+
+   .intro-text span{
+    font-weight:500;
+    color:#3f4f8f;
+    }
+
+}
+
+/* FORMULARIO DE CONTACTO */
+.contact-form {
+    background: #f7f8fb;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #2d2d2d;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-group label i {
+    color: #3f4f8f;
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 0.9rem 1rem;
+    border: 1.5px solid #d5d8e0;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    background: white;
+    transition: all 0.3s ease;
+    color: #333;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #3f4f8f;
+    box-shadow: 0 0 0 3px rgba(63, 79, 143, 0.15);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #999;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Checkbox personalizado */
+.checkbox-label {
+    display: flex !important;
+    align-items: flex-start;
+    gap: 0.8rem;
+    cursor: pointer;
+    font-weight: normal !important;
+}
+
+.checkbox-label input[type="checkbox"] {
+    margin-top: 0.3rem;
+    width: 18px;
+    height: 18px;
+    accent-color: #3f4f8f;
+    cursor: pointer;
+}
+
+.checkbox-label a {
+    color: #3f4f8f;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.checkbox-label a:hover {
+    text-decoration: underline;
+}
+
+/* Botones del formulario */
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.submit-btn {
+    flex: 1;
+    background: #3f4f8f;
+    color: white;
+    border: none;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    box-shadow: 0 4px 15px rgba(63, 79, 143, 0.3);
+}
+
+.submit-btn:hover {
+    background: #2f3f75;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(63, 79, 143, 0.4);
+}
+
+.reset-btn {
+    flex: 0.5;
+    background: #e6e8ed;
+    color: #555;
+    border: 1.5px solid #d5d8e0;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+}
+
+.reset-btn:hover {
+    background: #d5d8e0;
+    color: #333;
+}
+
+/* Mensajes del formulario */
+.form-message {
+    margin-top: 1.5rem;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 500;
+    display: none;
+}
+
+.form-message.success {
+    background: #e8f7ef;
+    color: #2d5e3e;
+    border: 1px solid #a8d5ba;
+    display: block;
+}
+
+.form-message.error {
+    background: #fdeaea;
+    color: #7a1c1c;
+    border: 1px solid #f5c2c2;
+    display: block;
+}
+
+/* Modal de Política de Privacidad */
+.privacy-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: modalFadeIn 0.3s ease;
+}
+
+.privacy-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+}
+
+.privacy-modal-content {
+    position: relative;
+    background: white;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 600px;
+    padding: 2rem;
+    z-index: 2001;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    animation: modalSlideIn 0.3s ease;
+}
+
+.privacy-modal-content h3 {
+    font-family: 'Playfair Display', serif;
+    color: #2d2d2d;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.5rem;
+}
+
+.privacy-modal-content h3 i {
+    color: #3f4f8f;
+}
+
+.privacy-content {
+    margin-bottom: 2rem;
+}
+
+.privacy-content p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.privacy-content strong {
+    color: #2d2d2d;
+}
+
+.privacy-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.2rem;
+    background: #f0f1f5;
+    color: #555;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.privacy-close:hover {
+    background: #e6e8ed;
+    color: #333;
+}
+
+.privacy-actions {
+    text-align: center;
+}
+
+.privacy-btn {
+    background: #3f4f8f;
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.privacy-btn:hover {
+    background: #2f3f75;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Responsive del formulario */
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+    
+    .contact-form {
+        padding: 1.5rem;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .submit-btn,
+    .reset-btn {
+        width: 100%;
+        flex: none;
+    }
+    
+    .privacy-modal-content {
+        width: 95%;
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-form {
+        padding: 1.2rem;
+    }
+    
+    .privacy-modal-content {
+        padding: 1.2rem;
+    }
+    
+    .privacy-modal-content h3 {
+        font-size: 1.3rem;
+    }
+}
+    
+/* Botón para mostrar/ocultar formulario */
+.form-toggle-btn {
+    background: #3f4f8f;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.form-toggle-btn:hover {
+    background: #2f3f75;
+    transform: translateY(-2px);
+}
+
+.form-toggle-btn i {
+    transition: transform 0.3s ease;
+}
+
+.form-toggle-btn.active i {
+    transform: rotate(180deg);
+}
+
+/* Animación para mostrar formulario */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+        max-height: 0;
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        max-height: 2000px;
+    }
+}
+
+.form-container {
+    animation: slideDown 0.5s ease-out;
+    overflow: hidden;
+}
+    
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="header-inner">        
+
+        <img src="profile.jpg" class="profile-img" alt="M. Guadalupe Salva">
+        
+        <div class="header-text">
+            <h1 class="name">M. Guadalupe Salva</h1>
+            <p class="title">
+              <span class="role">
+                <i class="fas fa-scale-balanced role-icon"></i>
+                 Abogada · Asesoramiento · Litigios
+                </span>
+                <br>
+                <span class="degree">Especialización en Derecho Procesal / Maestría en Argumentación Jurídica</span>
+            </p>
+            <p class="intro-text">
+              <span>Abogada y Titular</span> del Centro de Servicios Legales, ofrece 
+              <span>atención jurídica personalizada</span> con un enfoque 
+              <span>claro, humano y responsable</span>, acompañando a cada persona en la 
+              <span>comprensión y defensa de sus derechos.</span>
+            </p>
+
+
+            <!--<div class="contact-list">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i><span id="phone"></span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <a id="addressShort" target="_blank"></a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i><span id="email"></span>
+                </div>
+            </div>-->
+        </div>
+    </div>
+</header>
+
+
+<section class="section">
+  <h2>Áreas de práctica</h2>
+
+  <div class="practice-areas">
+    <div class="area">Derecho Laboral - ART</div>
+    <div class="area">Derecho de Familia - Sucesiones</div>
+    <div class="area">Defensa del Consumidor</div> 
+    <div class="area">Amparos de Salud</div>
+    <div class="area">Asuntos Civiles</div>    
+  </div>
+</section>
+
+
+<section class="section">
+  <h2>Reserva de citas</h2>
+    <p style="font-size:.9rem;color:#666;margin-top:-0.6rem">
+    Turnos presenciales y online con <span>reserva previa</span>.
+    <span>Se confirma con el pago de una seña.</span>
+    </p>
+
+  <div class="contact-grid">
+
+    <!-- Cita presencial -->
+    <div class="contact-card highlight">
+      <i class="fas fa-map-marker-alt"></i>
+      <h3>Cita presencial</h3>
+      <p>Atención en Pilar, Córdoba.</p>
+      <!--<button class="btn-primary" onclick="openCalendly('presencial')">
+        Reservar turno presencial
+      </button>-->
+      <button class="btn-primary" onclick="processReservation('presencial')">
+        Reservar turno presencial
+      </button>    
+      <!--<div style="margin:0.8rem 0;padding:0.5rem;background:#f0f4ff;border-radius:8px;">
+        <div style="font-size:0.85rem;color:#666;">Seña requerida:</div>
+        <div style="font-size:1.2rem;font-weight:600;color:#3f4f8f;">$5.000</div>
+      </div>
+      <button class="btn-primary" onclick="processReservation('presencial')">
+          <i class="fas fa-calendar-check"></i> Reservar con pago
+      </button>-->
+    </div>
+
+    <!-- Cita online -->
+    <div class="contact-card highlight">
+      <i class="fas fa-video"></i>
+      <h3>Cita online</h3>
+      <p>Consulta virtual por videollamada.</p>
+      <button class="btn-primary" onclick="openCalendly('online')">
+        Reservar turno online
+    </button>
+    </div>
+  </div>  
+    
+  <div id="calendlyContainer" class="calendly-wrapper"></div>
+
+<script src="https://assets.calendly.com/assets/external/widget.js"></script>
+
+    <!-- Botón de cancelar -->
+  <div id="cancelCalendlyBtn" style="display: none; text-align: center; margin: 15px 0;">
+    <button style="padding: 10px 24px; background: #f44336; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 0.95rem; font-weight: 500; box-shadow: 0 4px 12px rgba(244, 67, 54, 0.25); transition: all 0.3s ease;">
+      <i class="fas fa-times" style="margin-right: 8px;"></i> Cancelar y cerrar calendario
+    </button>
+  </div>
+
+ </section> 
+ 
+ <section class="section soft">
+  <h2>Contacto</h2> 
+    <!-- Formulario -->
+    <div class="contact-grid">
+     <div class="contact-card primary">
+      <i class="fas fa-envelope-open-text"></i>
+      <h3>Formulario de contacto</h3>
+      <p>Realice una consulta o deje su mensaje.</p>
+      <a href="javascript:void(0)" class="btn-link" onclick="toggleForm()">Ir al formulario</a>
+    </div>
+
+    <!-- vCard -->
+    <div class="contact-card primary">
+      <i class="fas fa-address-card"></i>
+      <h3>Guardar contacto</h3>
+      <p>Agregue el contacto profesional a su agenda.</p>
+      <a href="#" onclick="downloadVCF()" class="btn-link">Descargar vCard</a>
+    </div>    
+   </div>        
+</section>
+
+<!-- Sección del Formulario -->
+<div id="formContainer" style="display: none;">
+    <h2>Formulario de Contacto</h2>
+    <p style="font-size: 0.95rem; color: #666; margin-bottom: 2rem;">
+        Complete el siguiente formulario para realizar su consulta. Me pondré en contacto a la brevedad.
+    </p>
+
+    <form id="contactForm" class="contact-form">
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="nombre">
+                    <i class="fas fa-user"></i> Nombre completo *
+                </label>
+                <input type="text" id="nombre" name="nombre" required 
+                       placeholder="Ingrese su nombre y apellido">
+            </div>
+
+            <div class="form-group">
+                <label for="email">
+                    <i class="fas fa-envelope"></i> Correo electrónico *
+                </label>
+                <input type="email" id="email" name="email" required 
+                       placeholder="ejemplo@correo.com">
+            </div>
+
+            <div class="form-group">
+                <label for="telefono">
+                    <i class="fas fa-phone"></i> Teléfono *
+                </label>
+                <input type="tel" id="telefono" name="telefono" required 
+                       placeholder="351 123 4567">
+            </div>
+
+            <div class="form-group">
+                <label for="asunto">
+                    <i class="fas fa-tag"></i> Asunto *
+                </label>
+                <select id="asunto" name="asunto" required>
+                    <option value="" disabled selected>Seleccione el motivo de consulta</option>
+                    <option value="laboral">Derecho Laboral - ART</option>
+                    <option value="familia">Derecho de Familia - Sucesiones</option>
+                    <option value="consumidor">Defensa del Consumidor</option>
+                    <option value="salud">Amparos de Salud</option>
+                    <option value="civil">Asuntos Civiles</option>
+                    <option value="otro">Otra consulta</option>
+                </select>
+            </div>
+
+            <div class="form-group full-width">
+                <label for="mensaje">
+                    <i class="fas fa-comment-dots"></i> Mensaje *
+                </label>
+                <textarea id="mensaje" name="mensaje" rows="6" required 
+                          placeholder="Describa su consulta en detalle..."></textarea>
+            </div>
+
+            <!--<div class="form-group full-width">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="consentimiento" name="consentimiento">
+                    <span>
+                        Autorizo el tratamiento de mis datos personales según 
+                        <a href="#" onclick="showPrivacyPolicy()">política de privacidad</a> *
+                    </span>
+                </label>
+            </div>-->
+
+            <div class="form-actions full-width">
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Enviar Consulta
+                </button>
+                <button type="reset" class="reset-btn">
+                    <i class="fas fa-eraser"></i> Limpiar Formulario
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div id="formMessage" class="form-message"></div>
+</div>
+
+<!-- Modal de Política de Privacidad -->
+<!--<div id="privacyModal" class="privacy-modal" style="display: none;">
+    <div class="privacy-modal-overlay" onclick="closePrivacyModal()"></div>
+    <div class="privacy-modal-content">
+        <button class="privacy-close" onclick="closePrivacyModal()">×</button>
+        <h3><i class="fas fa-shield-alt"></i> Política de Privacidad</h3>
+        <div class="privacy-content">
+            <p><strong>Responsable:</strong> M. Guadalupe Salva - Centro de Servicios Legales</p>
+            <p><strong>Finalidad:</strong> Atender su consulta y gestionar citas.</p>
+            <p><strong>Legitimación:</strong> Su consentimiento expreso.</p>
+            <p><strong>Destinatarios:</strong> Sus datos no serán cedidos a terceros sin su autorización.</p>
+            <p><strong>Derechos:</strong> Puede ejercer sus derechos de acceso, rectificación, cancelación y oposición.</p>
+            <p><strong>Contacto:</strong> oficinalegal.salva@gmail.com</p>
+        </div>
+        <div class="privacy-actions">
+            <button onclick="closePrivacyModal()" class="privacy-btn">Entendido</button>
+        </div>
+    </div>
+</div>-->
+    
+<footer class="footer">
+  <p>© <span id="current-year"></span> M. Guadalupe Salva - Centro de Servicios Legales</p>
+  <p>Todos los derechos reservados.</p>
+  <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</footer>
+
+<script>
+const config={
+    telefono:'+54 9 351 7079452',
+    whatsapp:'5493517079452',
+    ciudad:'Pilar, Córdoba',
+    direccion:'Pilar MiniMall Local 8, Pilar - Córdoba',
+    maps:'https://maps.app.goo.gl/9WTB8GeuAsaMsxL78',
+    email:'oficinalegal.salva@gmail.com',    
+    horario:'Online: Lun-Mar-Jue-Vier 10am a 17pm; Presencial: Mar 10am a 17pm',
+    web:'https://draguadalupesalva.github.io/perfil/'
+};
+
+// HEADER
+//phone.textContent = config.telefono;
+//email.textContent = config.email;
+
+//addressShort.textContent = config.ciudad;
+//addressShort.href = config.maps;
+
+// CARD CITA PREVIA
+//addressFull.textContent = config.direccion;
+//addressFull.href = config.maps;
+//schedule.textContent = config.horario;
+
+//whatsapp.href = `https://wa.me/${config.whatsapp}?text=Hola,%20quisiera%20realizar%20una%20consulta.`;
+//calendarLink.href = config.calendar;
+
+//year.textContent = new Date().getFullYear();
+
+function downloadVCF(){
+const v=`BEGIN:VCARD
+VERSION:3.0
+N:Salva;Guadalupe;;M;
+FN:M. Guadalupe Salva
+ORG:Centro de Servicios Legales
+TITLE:Abogada · Asesoramiento · Litigios
+TEL;TYPE=CELL:${config.telefono}
+EMAIL;TYPE=INTERNET:${config.email}
+URL:${config.web}
+END:VCARD`;
+
+const b=new Blob([v],{type:'text/vcard;charset=utf-8'});
+const a=document.createElement('a');
+a.href=URL.createObjectURL(b);
+a.download='M_Guadalupe_Salva.vcf';
+a.click();
+}
+
+const calendlyUrls = {
+  presencial: "https://calendly.com/mguadalupesalva/cita-presencial",
+  online: "https://calendly.com/mguadalupesalva/cita-online"
+};
+
+function openCalendly(tipo) {
+    const c = document.getElementById('calendlyContainer');
+    const cancelBtn = document.getElementById('cancelCalendlyBtn');
+    
+    // Mostrar botón de cancelar
+    cancelBtn.style.display = 'block';
+    
+    // Configurar evento en el botón de cancelar
+    const cancelButton = cancelBtn.querySelector('button');
+    cancelButton.onclick = closeCalendly;
+    
+    // Agregar efectos hover
+    cancelButton.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-2px)';
+        this.style.boxShadow = '0 6px 16px rgba(244, 67, 54, 0.35)';
+    });
+    
+    cancelButton.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+        this.style.boxShadow = '0 4px 12px rgba(244, 67, 54, 0.25)';
+    });
+    
+    // Limpiar y mostrar calendario
+    c.innerHTML = "";
+    c.style.display = 'block';
+    
+    // Crear div específico para Calendly
+    const widgetDiv = document.createElement('div');
+    widgetDiv.id = 'calendlyWidgetDynamic';
+    widgetDiv.style.width = '100%';
+    widgetDiv.style.minHeight = '800px';
+    widgetDiv.style.height = '800px';
+    c.appendChild(widgetDiv);
+    
+    // Inicializar Calendly
+    Calendly.initInlineWidget({
+        url: calendlyUrls[tipo],
+        parentElement: widgetDiv
+    });
+    
+    // Scroll al calendario
+    c.scrollIntoView({ behavior: 'smooth' });
+    
+    // Forzar altura después de cargar
+    setTimeout(() => {
+        const iframe = document.querySelector('.calendly-inline-widget iframe');
+        if (iframe) {
+            iframe.style.height = '800px';
+            iframe.style.minHeight = '800px';
+        }
+        
+        const calendlyContainer = document.querySelector('.calendly-inline-widget');
+        if (calendlyContainer) {
+            calendlyContainer.style.height = '800px';
+            calendlyContainer.style.minHeight = '800px';
+        }
+    }, 1000);
+}
+
+function closeCalendly() {
+    const c = document.getElementById('calendlyContainer');
+    const cancelBtn = document.getElementById('cancelCalendlyBtn');
+    
+    // Ocultar ambos
+    c.style.display = 'none';
+    cancelBtn.style.display = 'none';
+    
+    // Limpiar contenido
+    c.innerHTML = '';
+    
+    // Scroll de vuelta a los botones de reserva
+    setTimeout(() => {
+        document.querySelector('.section h2').scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'center'
+        });
+    }, 100);
+}    
+ 
+// Funciones para el modal de privacidad
+function showPrivacyPolicy() {
+    event.preventDefault();
+    document.getElementById('privacyModal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function closePrivacyModal() {
+    document.getElementById('privacyModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Cerrar modal con ESC
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && document.getElementById('privacyModal').style.display === 'flex') {
+        closePrivacyModal();
+    }
+});
+
+function toggleForm() {
+    const container = document.getElementById('formContainer');
+    const link = event.target;
+    
+    if (container.style.display === 'none') {
+        container.style.display = 'block';
+        link.textContent = 'Ocultar formulario';
+        
+        // Scroll al formulario
+        container.scrollIntoView({ behavior: 'smooth' });
+    } else {
+        container.style.display = 'none';
+        link.textContent = 'Ir al formulario';
+    }
+}
+    
+// Función para inicializar eventos del formulario
+function initializeFormEvents() {
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!validateForm()) {
+                return;
+            }
+            
+            const messageDiv = document.getElementById('formMessage');
+            const submitBtn = document.querySelector('.submit-btn');
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+            
+            messageDiv.textContent = 'Enviando consulta...';
+            messageDiv.className = 'form-message';
+            messageDiv.style.display = 'block';
+            
+            try {
+                // REEMPLAZA esta URL con la de tu Google Apps Script
+                const scriptURL = 'https://script.google.com/macros/s/AKfycbxP1cBaISyI4rMOjveCcPNtwNdxekMeWEmoucsOdztdedR6tt8B3JTLbIfWPUrMDXK1Hw/exec';
+                
+                const response = await fetch(scriptURL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Importante para Google Apps Script
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        nombre: document.getElementById('nombre').value,
+                        email: document.getElementById('email').value,
+                        telefono: document.getElementById('telefono').value,
+                        asunto: document.getElementById('asunto').value,
+                        mensaje: document.getElementById('mensaje').value
+                    })
+                });
+                
+                messageDiv.textContent = '✅ Consulta enviada correctamente. Me pondré en contacto a la brevedad.';
+                messageDiv.className = 'form-message success';
+                
+                document.getElementById('contactForm').reset();
+                
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                    // Ocultar formulario después de enviar
+                    setTimeout(() => {
+                        const container = document.getElementById('formContainer');
+                        const link = document.querySelector('.contact-card.primary .btn-link');
+                        if (container && link) {
+                            container.style.display = 'none';
+                            link.textContent = 'Ir al formulario';
+                        }
+                    }, 1000);
+                }, 5000);
+                
+            } catch (error) {
+                messageDiv.textContent = '❌ Error al enviar la consulta. Por favor, intente nuevamente o contácteme por teléfono.';
+                messageDiv.className = 'form-message error';
+                console.error('Error:', error);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar Consulta';
+            }
+        });
+    }
+    
+    // Inicializar validación en tiempo real
+    document.querySelectorAll('#contactForm input, #contactForm textarea, #contactForm select').forEach(input => {
+        input.addEventListener('blur', function() {
+            if (this.value.trim() && this.checkValidity()) {
+                this.style.borderColor = '#a8d5ba';
+                this.style.backgroundColor = '#f8fff9';
+            } else if (!this.checkValidity() && this.value.trim()) {
+                this.style.borderColor = '#f5c2c2';
+                this.style.backgroundColor = '#fff8f8';
+            } else {
+                this.style.borderColor = '#d5d8e0';
+                this.style.backgroundColor = 'white';
+            }
+        });
+    });
+}
+
+// Función para validar el formulario
+function validateForm() {
+    const nombre = document.getElementById('nombre')?.value.trim();
+    const email = document.getElementById('email')?.value.trim();
+    const telefono = document.getElementById('telefono')?.value.trim();
+    const asunto = document.getElementById('asunto')?.value;
+    const mensaje = document.getElementById('mensaje')?.value.trim();
+    //const consentimiento = document.getElementById('consentimiento')?.checked;
+    
+    const messageDiv = document.getElementById('formMessage');
+    
+    if (!nombre || !email || !telefono || !asunto || !mensaje) {
+        messageDiv.textContent = '❌ Por favor complete todos los campos obligatorios (*)';
+        messageDiv.className = 'form-message error';
+        messageDiv.style.display = 'block';
+        return false;
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        messageDiv.textContent = '❌ Por favor ingrese un correo electrónico válido';
+        messageDiv.className = 'form-message error';
+        messageDiv.style.display = 'block';
+        return false;
+    }
+    
+    const phoneRegex = /^[\d\s\-\(\)\+]{8,}$/;
+    if (!phoneRegex.test(telefono.replace(/\s/g, ''))) {
+        messageDiv.textContent = '❌ Por favor ingrese un número de teléfono válido';
+        messageDiv.className = 'form-message error';
+        messageDiv.style.display = 'block';
+        return false;
+    }
+    
+    return true;
+}
+
+// Función para ocultar formulario
+function hideContactForm() {
+    const container = document.getElementById('formContainer');
+    const link = document.querySelector('.contact-card.primary .btn-link');
+    if (container && link) {
+        container.style.display = 'none';
+        link.textContent = 'Ir al formulario';
+    }
+}
+
+// Función toggleForm modificada
+function toggleForm() {
+    const container = document.getElementById('formContainer');
+    const link = event.target;
+    
+    if (container.style.display === 'none') {
+        container.style.display = 'block';
+        link.textContent = 'Ocultar formulario';
+        
+        // Inicializar eventos del formulario
+        setTimeout(() => {
+            initializeFormEvents();
+        }, 100);
+        
+        // Scroll al formulario
+        container.scrollIntoView({ behavior: 'smooth' });
+    } else {
+        container.style.display = 'none';
+        link.textContent = 'Ir al formulario';
+    }
+}
+
+// Las funciones de privacidad se mantienen igual
+function showPrivacyPolicy() {
+    event.preventDefault();
+    document.getElementById('privacyModal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function closePrivacyModal() {
+    document.getElementById('privacyModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Inicializar cuando se cargue la página
+document.addEventListener('DOMContentLoaded', function() {
+    // Si el formulario ya está visible (por ejemplo, si alguien recarga la página)
+    if (document.getElementById('formContainer').style.display === 'block') {
+        initializeFormEvents();
+    }
+    
+    // Cerrar modal con ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && document.getElementById('privacyModal').style.display === 'flex') {
+            closePrivacyModal();
+        }
+    });
+});
+
+const paymentLinks = {
+    presencial: "https://mpago.la/XXXXXXX", // Reemplaza con tu link real
+    online: "https://mpago.la/YYYYYYY"      // Reemplaza con tu link real
+};
+
+function processReservation(tipo) {
+    // Guardar tipo de cita en localStorage
+    localStorage.setItem('pendingAppointment', tipo);
+    
+    // Mostrar modal de confirmación
+    showPaymentModal(tipo);
+}
+
+function showPaymentModal(tipo) {
+    const modalHTML = `
+    <div id="paymentModal" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;">
+        <div style="background:white;border-radius:16px;padding:2rem;max-width:500px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+            <div style="text-align:center;margin-bottom:1.5rem;">
+                <div style="background:#f0f4ff;width:60px;height:60px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin-bottom:1rem;">
+                    <i class="fas fa-lock" style="font-size:1.5rem;color:#3f4f8f;"></i>
+                </div>
+                <h3 style="color:#2d2d2d;margin-bottom:0.5rem;">Confirmar Reserva</h3>
+                <p style="color:#666;font-size:0.95rem;">Para garantizar su cita ${tipo === 'presencial' ? 'presencial' : 'online'}</p>
+            </div>
+            
+            <div style="background:#f8f9ff;border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;text-align:center;">
+                <div style="font-size:0.9rem;color:#666;margin-bottom:0.5rem;">Monto de la seña</div>
+                <div style="font-size:2.5rem;font-weight:700;color:#3f4f8f;">$5.000</div>
+                <div style="font-size:0.85rem;color:#666;margin-top:0.5rem;">Descontable del total de honorarios</div>
+            </div>
+            
+            <div style="margin-bottom:1.5rem;">
+                <a href="${paymentLinks[tipo]}" 
+                   target="_blank" 
+                   onclick="startPaymentProcess()"
+                   style="display:block;background:#009ee3;color:white;text-decoration:none;text-align:center;padding:1rem;border-radius:10px;font-weight:600;font-size:1.1rem;transition:all 0.3s;">
+                    <i class="fas fa-lock" style="margin-right:8px;"></i>
+                    Pagar Seña con Mercado Pago
+                </a>
+                <p style="text-align:center;margin-top:0.5rem;font-size:0.85rem;color:#666;">
+                    <i class="fas fa-shield-alt" style="margin-right:5px;"></i>
+                    Pago 100% seguro
+                </p>
+            </div>
+            
+            <div style="border-top:1px solid #eee;padding-top:1rem;text-align:center;">
+                <button onclick="closePaymentModal()" 
+                        style="background:none;border:1px solid #ddd;color:#666;padding:0.7rem 1.5rem;border-radius:8px;cursor:pointer;font-size:0.95rem;">
+                    Cancelar
+                </button>
+                <p style="font-size:0.8rem;color:#999;margin-top:1rem;">
+                    Al pagar, será redirigido a Mercado Pago. Luego podrá seleccionar fecha y hora.
+                </p>
+            </div>
+        </div>
+    </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+}
+
+function startPaymentProcess() {
+    // Cerrar modal
+    closePaymentModal();
+    
+    // Mostrar instrucciones
+    setTimeout(() => {
+        showInstructionsModal();
+    }, 500);
+}
+
+function showInstructionsModal() {
+    const tipo = localStorage.getItem('pendingAppointment');
+    const modalHTML = `
+    <div id="instructionsModal" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px;">
+        <div style="background:white;border-radius:16px;padding:2rem;max-width:500px;width:100%;text-align:center;">
+            <div style="margin-bottom:1.5rem;">
+                <i class="fas fa-check-circle" style="font-size:3rem;color:#4CAF50;"></i>
+            </div>
+            <h3 style="color:#2d2d2d;margin-bottom:1rem;">Pago Iniciado</h3>
+            <p style="color:#666;margin-bottom:1.5rem;">
+                <strong>Por favor complete el pago en la pestaña de Mercado Pago que se abrió.</strong><br><br>
+                Una vez finalizado, regrese a esta página y haga clic en "Continuar a Calendly".
+            </p>
+            
+            <div style="display:flex;gap:1rem;justify-content:center;margin-top:2rem;">
+                <button onclick="openCalendlyAfterPayment()" 
+                        style="background:#3f4f8f;color:white;border:none;padding:1rem 2rem;border-radius:10px;font-weight:600;cursor:pointer;flex:1;">
+                    <i class="fas fa-calendar-alt" style="margin-right:8px;"></i>
+                    Continuar a Calendly
+                </button>
+            </div>
+            
+            <p style="font-size:0.8rem;color:#999;margin-top:1.5rem;">
+                ¿Problemas con el pago?<br>
+                <a href="https://wa.me/5493517079452" target="_blank" style="color:#3f4f8f;">
+                    <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+                </a>
+            </p>
+        </div>
+    </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+}
+
+function openCalendlyAfterPayment() {
+    const tipo = localStorage.getItem('pendingAppointment');
+    closeInstructionsModal();
+    
+    // Pequeño delay para limpiar
+    setTimeout(() => {
+        openCalendly(tipo);
+    }, 300);
+}
+
+function closePaymentModal() {
+    const modal = document.getElementById('paymentModal');
+    if (modal) modal.remove();
+}
+
+function closeInstructionsModal() {
+    const modal = document.getElementById('instructionsModal');
+    if (modal) modal.remove();
+}
+
+async function optimalFlow(tipo) {
+    // 1. Mostrar términos
+    if (!confirm(`Seña requerida: $5.000\n\n¿Desea continuar con la reserva?`)) {
+        return;
+    }
+    
+    // 2. Abrir pago en nueva pestaña
+    const paymentWindow = window.open(
+        paymentLinks[tipo], 
+        'mercado_pago', 
+        'width=500,height=700'
+    );
+    
+    // 3. Mostrar espera
+    showLoadingMessage();
+    
+    // 4. Verificar cada 3 segundos si volvió
+    const checkInterval = setInterval(() => {
+        if (paymentWindow.closed) {
+            clearInterval(checkInterval);
+            
+            // Preguntar si completó pago
+            if (confirm("¿Completó el pago exitosamente?")) {
+                openCalendly(tipo);
+            } else {
+                alert("Puede intentar nuevamente o contactarnos por WhatsApp.");
+            }
+        }
+    }, 3000);
+}
+
+// Función de prueba
+async function testFormSubmission() {
+    console.log('Probando conexión con Google Apps Script...');
+    
+    try {
+        const testData = {
+            nombre: "Test Nombre",
+            email: "test@ejemplo.com",
+            telefono: "3511234567",
+            asunto: "Test",
+            mensaje: "Esta es una prueba"
+        };
+        
+        const response = await fetch('https://script.google.com/macros/s/AKfycbxP1cBaISyI4rMOjveCcPNtwNdxekMeWEmoucsOdztdedR6tt8B3JTLbIfWPUrMDXK1Hw/exec', {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(testData)
+        });
+        
+        console.log('Prueba enviada. Revisa tu email en unos minutos.');
+        
+    } catch (error) {
+        console.error('Error en prueba:', error);
+    }
+}
+        
+</script>
+
+</body>
+</html>

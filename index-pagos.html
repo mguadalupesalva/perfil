@@ -1993,7 +1993,7 @@ ${metodoPago === 'mercado_pago'
     : 'Verificar transferencia cuando el cliente envíe comprobante'}`;
     
     try {
-        await fetch('https://script.google.com/macros/s/AKfycbxP1cBaISyI4rMOjveCcPNtwNdxekMeWEmoucsOdztdedR6tt8B3JTLbIfWPUrMDXK1Hw/exec', {
+        await fetch('https://script.google.com/macros/s/AKfycbysCcerXQUoWgOR0pNMznpfhXtxuq7q1lIblxthonUz1Re5-UN7NBx27rxqT1FLk1Wggw/exec', {
             method: 'POST',
             mode: 'no-cors',
             headers: { 'Content-Type': 'application/json' },
@@ -2598,7 +2598,7 @@ function initializeFormEvents() {
             messageDiv.style.display = 'block';
             
             try {
-                const scriptURL = 'https://script.google.com/macros/s/AKfycbxP1cBaISyI4rMOjveCcPNtwNdxekMeWEmoucsOdztdedR6tt8B3JTLbIfWPUrMDXK1Hw/exec';
+                const scriptURL = 'https://script.google.com/macros/s/AKfycbysCcerXQUoWgOR0pNMznpfhXtxuq7q1lIblxthonUz1Re5-UN7NBx27rxqT1FLk1Wggw/exec';
                 
                 await fetch(scriptURL, {
                     method: 'POST',
@@ -2824,4 +2824,5 @@ function cerrarInstruccionesMP() {
 }
 </script>
 </body>
+
 </html>

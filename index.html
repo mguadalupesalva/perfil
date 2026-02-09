@@ -54,7 +54,7 @@ body{
   height: 150px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #fff;
+  border: 2px solid #fff;
   background: #fff;
   box-shadow: 0 10px 25px rgba(0,0,0,.25);
   z-index: 10; /* ahora sí, por encima */
@@ -825,11 +825,38 @@ button[onclick*="copyToClipboard"]:hover {
         border-radius: 50%;
         object-fit: cover;
         display: block;
-        margin: 0 auto -20px;
+        margin: 0 auto -10px;
         z-index: 5;
         background: #fff;
     }
 
+    /* Banda nombre */
+    .band-name {
+        padding: 14px 20px;
+    }
+
+    .band-name .name {
+        font-size: 1.3rem;   /* antes 1.6 aprox */
+        line-height: 1.25;
+    }
+
+    /* Banda rol */
+    .band-role {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+
+    /* Texto introductorio */
+    .intro-wrapper {
+        margin-top: 18px;
+        padding: 0 20px;
+    }
+
+    .intro-text {
+        font-size: 0.95rem;
+        line-height: 1.45;
+    }
+    
     .header-text{
         text-align: left;  
         max-width: 420px;  
@@ -3107,6 +3134,7 @@ function cerrarInstruccionesMP() {
 </script>
 </body>
 </html>
+
 
 
 

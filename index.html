@@ -24,16 +24,13 @@ body{
 
 /* HEADER */
 .header{
-    background: linear-gradient(135deg, #f8f9fc 0%, #eef1f9 100%);
-    border-bottom: 2px solid #3f4f8f;
-    padding:2.4rem 2rem;
-    border-radius:20px;
-    box-shadow:0 14px 34px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.75);
-    display:flex;
-    justify-content:center;
-    animation:fadeUp .8s ease-out both;
+  position: relative;
+  padding: 2.5rem 0 1.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
+    
 .header-text p:not(.title){
     font-size:0.95rem;
     color:#555;
@@ -49,20 +46,27 @@ body{
 }
 
 .profile-img{
-    height:100%;
-    width:160px;
-    border-radius:14px;
-    object-fit:cover;
-    box-shadow:0 6px 18px rgba(0,0,0,.15);
-    border: 2px solid white;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  position: absolute;
+  left: 40px;
+  top: 45%;
+  transform: translateY(-50%);
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fff;
+  background: #fff;
+  box-shadow: 0 10px 25px rgba(0,0,0,.25);
+  z-index: 10; /* ahora sí, por encima */
 }
+
 
 .header-text{
     display:flex;
     flex-direction:column;
     justify-content:center;
     text-align:left;
+    margin-left:0;
 }    
 
 .name{
@@ -75,11 +79,96 @@ body{
     line-height:1.15;
 }
 
+.bands-container {
+    position: relative;
+    padding-left: 200px; /* Espacio para la foto */
+    margin-bottom: 0;
+    z-index: 60; /* MAYOR que la foto para que el texto quede encima */
+}
+
+.bands {    
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding-left: 10px;  
+}
+    
+.band {
+  position: relative;
+  border-radius: 0 36px 36px 0;    
+  width: 100%;
+  padding: 14px 40px 14px 200px;    
+}
+
+.band:hover {
+    transform: translateX(5px);
+}
+
+.band-name {
+    background: #0f2a44;
+    color: #fff;
+    width: 90%;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);    
+    position: relative;
+    margin-bottom: 16px;
+}
+    
+.band-name h1 {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #fff;
+    letter-spacing: 0.5px;
+    position: relative;
+}
+
+.band-role {
+    background: #d6d6d6;
+    color: #3f4f8f;
+    /*padding: 14px 40px 14px 0px;*/
+    font-size: 1.1rem;
+    font-weight: 500;
+    width: 80%;
+    box-shadow: 5px 5px 12px rgba(0,0,0,0.08);
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.band-name,
+.band-role {
+  min-height: 64px;          /* ajustable: 60–68 según gusto */
+  display: flex;
+  align-items: center;       /* centra verticalmente el texto */
+}    
+    
+.band-role p {
+  margin: 0;
+  color:#3f4f8f;    
+}
+    
+.intro-wrapper{
+    margin-top: 2.6rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+    
 .intro-text{
-    margin-top:0.6rem;
-    font-size:0.95rem;
+    width: 100%;
+    max-width: none;
+    font-size: 0.96rem;
     color:#4b4b4b;
-    line-height:1.6;
+    line-height:1.65;
+    background: rgba(255,255,255,0.78);
+    padding: 20px 26px;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    border-top: 3px solid rgba(63,79,143,0.35);
+    border-bottom: 3px solid rgba(63,79,143,0.35);
 }
 
 .intro-text span{
@@ -87,6 +176,12 @@ body{
     color:#3f4f8f;
 }
 
+/* Desde "atención jurídica personalizada" en adelante */
+.intro-text span:nth-of-type(n+5) {
+  color: #222;
+  font-weight: 500;
+}
+    
 .title{
     margin:0.7rem 0 1.1rem;
 }
@@ -94,13 +189,7 @@ body{
 .title .role{
     font-size:1rem;
     font-weight:500;
-    color:#2d2d2d;
-}
-
-.title .degree{
-    font-size:0.95rem;
-    font-weight:400;
-    color:#3f5ed7;
+    color:#3f4f8f;
 }
 
 .role{
@@ -716,8 +805,7 @@ button[onclick*="copyToClipboard"]:hover {
         margin:0.6rem 0 0.9rem;
     }
 
-    .title .role,
-    .title .degree{
+    .title .role{
         display:block;
         text-align:left;       
     }
@@ -1139,36 +1227,44 @@ button[onclick*="copyToClipboard"]:hover {
 <body>
 
 <header class="header">
-    <div class="header-inner">        
+
+    <div class="bands">
         <img src="profile.jpg" class="profile-img" alt="M. Guadalupe Salva">
-        <div class="header-text">
+        <div class="band band-name">
             <h1 class="name">M. Guadalupe Salva</h1>
+        </div>
+
+        <div class="band band-role">
             <p class="title">
                 <span class="role">
                     <i class="fas fa-scale-balanced role-icon"></i>
                     Abogada · Asesoramiento · Litigios
                 </span>
-                <br>
-                <span class="degree">Especialización en Derecho Procesal / Maestría en Argumentación Jurídica</span>
-            </p>
-            <p class="intro-text">
-                <span>Abogada y Titular</span> del Centro de Servicios Legales, ofrece 
-                <span>atención jurídica personalizada</span> con un enfoque 
-                <span>claro, humano y responsable</span>, acompañando a cada persona en la 
-                <span>comprensión y defensa de sus derechos.</span>
             </p>
         </div>
     </div>
+
+    <div class="intro-wrapper">
+        <p class="intro-text">
+            <span>Abogada</span> (Univ. Católica de Córdoba) –
+            <span>Especialista en Derecho Procesal</span> (Univ. de Alcalá de Henares) –
+            <span>Magister en Argumentación Jurídica</span> (Univ. de Alicante) –
+            <span>Directora del Centro de Servicios Legales</span>, con sede en Pilar,
+            brinda <span>atención jurídica personalizada</span> con un enfoque
+            <span>claro y responsable</span>, acompañando a sus clientes en la
+            <span>comprensión y defensa de sus derechos.</span>
+        </p>
+    </div>    
+
 </header>
 
 <section class="section">
     <h2>Áreas de práctica</h2>
     <div class="practice-areas">
         <div class="area">Derecho Laboral - ART</div>
-        <div class="area">Derecho de Familia - Sucesiones</div>
-        <div class="area">Defensa del Consumidor</div> 
         <div class="area">Amparos de Salud</div>
-        <div class="area">Asuntos Civiles</div>    
+        <div class="area">Derecho de Familia - Sucesiones</div>
+        <div class="area">Otros Asuntos Legales</div>    
     </div>
 </section>
 
@@ -1211,6 +1307,7 @@ button[onclick*="copyToClipboard"]:hover {
     </div>
 </section>
 
+<!-- Sección para continuar reserva pendiente -->
 <!-- Sección para continuar reserva pendiente -->
 <section class="section" style="background: linear-gradient(135deg, #f8fff8 0%, #f0f8ff 100%); border: 2px dashed #4CAF50;">
     <h2 style="color: #2d5e3e; border-bottom-color: #4CAF50; cursor: pointer;" 
@@ -1290,12 +1387,8 @@ button[onclick*="copyToClipboard"]:hover {
 <div id="formContainer" style="display: none;">
     <h2>Formulario de Contacto</h2>
     <p style="font-size: 0.95rem; color: #666; margin-bottom: 2rem;">
-        Complete el siguiente formulario para realizar su consulta. Me pondré en contacto a la brevedad.
-        <br>
-        <strong style="display: inline-block; margin-top: 0.5rem; padding: 0.5rem 1rem; background: #f0f4ff; border-radius: 6px; border-left: 4px solid #3f4f8f; color:#3f4f8f;">
-            Este formulario es para consultas simples o dudas iniciales sin costo.
-            Si necesita reservar una cita con seña, utilice los botones de "Reservar turno" arriba.
-        </strong>
+        Puede dejar aquí su consulta inicial.
+        <br>        
     </p>
 
     <form id="contactForm" class="contact-form">
@@ -1371,15 +1464,12 @@ button[onclick*="copyToClipboard"]:hover {
         <div id="preReservaHeader" style="color:white; padding:1.5rem; border-radius:16px 16px 0 0; display:flex; justify-content:space-between; align-items:center;">
             <div>
                 <h3 style="margin:0; font-size:1.3rem; display:flex; align-items:center; gap:0.8rem;">
-                    <i class="fas fa-calendar-plus"></i> Pre-reserva de cita
+                    <i class="fas fa-calendar-plus"></i> Reserva de consulta
                 </h3>
                 <p style="margin:0.5rem 0 0 0; opacity:0.9; font-size:0.9rem;">
-                    Complete sus datos para continuar con la seña
+                    Complete sus datos para reservar su consulta
                 </p>
             </div>
-            <button onclick="cerrarPreReserva()" style="background:rgba(255,255,255,0.2); color:white; border:none; width:36px; height:36px; border-radius:50%; font-size:1.5rem; cursor:pointer;">
-                ×
-            </button>
         </div>
         
         <!-- Aquí cambia el fondo del formulario a blanco -->
@@ -1425,12 +1515,12 @@ button[onclick*="copyToClipboard"]:hover {
                             style="width:100%; padding:0.9rem 1rem; border:2px solid #e0e0e0; border-radius:8px; font-size:1rem; background:white;"
                             onchange="actualizarMontoSena()">
                         <option value="" disabled selected>Seleccione el tipo de consulta</option>
-                        <option value="laboral">Derecho Laboral - ART (Seña: $5.000)</option>
-                        <option value="familia">Derecho de Familia - Sucesiones (Seña: $5.000)</option>
-                        <option value="consumidor">Defensa del Consumidor (Seña: $3.000)</option>
-                        <option value="salud">Amparos de Salud (Seña: $3.000)</option>
-                        <option value="civil">Asuntos Civiles (Seña: $4.000)</option>
-                        <option value="otro">Otra consulta (Seña: $3.000)</option>
+                        <option value="laboral">Derecho Laboral - ART (Consulta: $15.000)</option>
+                        <option value="familia">Derecho de Familia - Sucesiones (Consulta: $15.000)</option>
+                        <option value="consumidor">Defensa del Consumidor (Consulta: $10.000)</option>
+                        <option value="salud">Amparos de Salud (Consulta: $10.000)</option>
+                        <option value="civil">Asuntos Civiles (Consulta: $12.000)</option>
+                        <option value="otro">Otra consulta (Consulta: $9.000)</option>
                     </select>
                 </div>
                 
@@ -1465,14 +1555,15 @@ button[onclick*="copyToClipboard"]:hover {
                 
                 <div style="margin-bottom:2rem;">
                     <label style="display:flex; align-items:flex-start; gap:0.8rem; cursor:pointer;">
-                        <input type="checkbox" id="preTerminos" required 
-                               style="margin-top:0.3rem; width:20px; height:20px; accent-color:#3f4f8f;">
-                        <span style="font-size:0.9rem; color:#2d2d2d;">
-                            Acepto que esta es una <strong>pre-reserva</strong> y la seña de 
-                            <span id="montoTerminos" style="font-weight:600; color:#3f4f8f;">$0</span> 
-                            es obligatoria para confirmar la cita. La seña será descontada del total de honorarios. *
-                        </span>
-                    </label>
+                    <input type="checkbox" id="preTerminos" required 
+                           style="margin-top:0.3rem; width:20px; height:20px; accent-color:#3f4f8f;">
+                    <span style="font-size:0.9rem; color:#2d2d2d;">
+                        Acepto que esta es una <strong>reserva</strong> y el pago de 
+                        <span id="montoTerminos" style="font-weight:600; color:#3f4f8f;">$0</span> 
+                        es obligatorio para confirmar la cita. Este es el pago completo de la consulta inicial.*
+                    </span>
+                </label>
+
                 </div>
                 
                 <div style="display:flex; gap:1rem;">
@@ -1533,8 +1624,8 @@ const config = {
     ciudad: 'Pilar, Córdoba',
     direccion: 'Pilar MiniMall Local 8, Pilar - Córdoba',
     maps: 'https://maps.app.goo.gl/9WTB8GeuAsaMsxL78',
-    email: 'oficinalegal.salva@gmail.com',
-    web: 'https://draguadalupesalva.github.io/perfil/'
+    email: 'mguadalupesalva@gmail.com',
+    web: 'https://mguadalupesalva.github.io/perfil/'
 };
 
 const calendlyUrls = {
@@ -1542,19 +1633,19 @@ const calendlyUrls = {
     online: "https://calendly.com/mguadalupesalva/cita-online"
 };
 
-const montosSena = {
-    "laboral_presencial": 5000,
-    "laboral_online": 4000,
-    "familia_presencial": 5000,
-    "familia_online": 4000,
-    "consumidor_presencial": 3000,
-    "consumidor_online": 2500,
-    "salud_presencial": 3000,
-    "salud_online": 2500,
-    "civil_presencial": 4000,
-    "civil_online": 3500,
-    "otro_presencial": 3000,
-    "otro_online": 2500
+const montosConsulta = {
+    "laboral_presencial": 15000,
+    "laboral_online": 12000,
+    "familia_presencial": 15000,
+    "familia_online": 12000,
+    "consumidor_presencial": 10000,
+    "consumidor_online": 8000,
+    "salud_presencial": 10000,
+    "salud_online": 8000,
+    "civil_presencial": 12000,
+    "civil_online": 10000,
+    "otro_presencial": 9000,
+    "otro_online": 7000
 };
 
 const bankDetails = {
@@ -1673,14 +1764,21 @@ function cerrarPreReserva() {
 
 function actualizarMontoSena() {
     const tipoConsulta = document.getElementById('preTipoConsulta').value;
-    const tipoCita = preReservaActual.tipoCita; // 'presencial' u 'online'
+    const tipoCita = preReservaActual.tipoCita;
     
     if (tipoConsulta && tipoCita) {
         const key = `${tipoConsulta}_${tipoCita}`;
-        if (montosSena[key]) {
-            const monto = montosSena[key];
+        if (montosConsulta[key]) {
+            const monto = montosConsulta[key];
             document.getElementById('montoContainer').style.display = 'block';
-            document.getElementById('montoSena').textContent = `$${monto.toLocaleString('es-AR')}`;
+            
+            // Actualizar texto
+            const montoText = document.getElementById('montoSena');
+            montoText.innerHTML = `$${monto.toLocaleString('es-AR')}<br>
+                                   <span style="font-size:0.9rem; font-weight:normal; color:#666;">
+                                       ${tipoCita === 'presencial' ? 'Consulta presencial de 45 minutos' : 'Consulta online de 45 minutos'}
+                                   </span>`;
+            
             document.getElementById('montoTerminos').textContent = `$${monto.toLocaleString('es-AR')}`;
             preReservaActual.monto = monto;
         }
@@ -1702,6 +1800,94 @@ function actualizarContadorCaracteres() {
     }
 }
 
+async function enviarEmailPagoConfirmado(metodoPago) {
+    const datos = preReservaActual;
+    
+    const emailCliente = `
+✅ PAGO CONFIRMADO - ${datos.codigo}
+
+¡Hola ${datos.datosCliente.nombre}!
+
+Su pago ha sido confirmado exitosamente.
+
+🔹 **Detalles de la reserva:**
+• Código: ${datos.codigo}
+• Tipo de consulta: ${getNombreTipoConsulta(datos.datosCliente.tipoConsulta)}
+• Monto pagado: $${datos.monto.toLocaleString('es-AR')}
+• Modalidad: ${datos.tipoCita === 'presencial' ? 'Consulta Presencial' : 'Consulta Online'}
+
+🔹 **Próximo paso:**
+Ahora debe seleccionar la fecha y hora para su consulta:
+
+🔗 **Link para agendar:**
+${window.location.origin}${window.location.pathname}?codigo=${datos.codigo}
+
+⏱️ **Tiene 48 horas** para seleccionar fecha y hora.
+
+📍 **Información importante:**
+• Para consultas presenciales: Pilar MiniMall Local 8, Pilar - Córdoba
+• Para consultas online: Recibirá link de videollamada 15 minutos antes
+• Lleve toda la documentación relacionada a su caso
+
+📞 **Para reprogramaciones o consultas:**
+Email: mguadalupesalva@gmail.com
+
+Atentamente,
+M. Guadalupe Salva
+Abogada`;
+
+    const emailAbogada = `
+💰 NUEVA RESERVA - ${datos.codigo}
+
+📅 FECHA DE RESERVA: ${new Date().toLocaleString('es-AR')}
+
+👤 DATOS DEL CLIENTE:
+• Nombre: ${datos.datosCliente.nombre}
+• Email: ${datos.datosCliente.email}
+• Teléfono: ${datos.datosCliente.telefono}
+
+💰 DETALLES DE LA RESERVA:
+• Tipo: ${getNombreTipoConsulta(datos.datosCliente.tipoConsulta)}
+• Modalidad: ${datos.tipoCita === 'presencial' ? 'Presencial' : 'Online'}
+• Monto: $${datos.monto.toLocaleString('es-AR')}
+• Método de pago: ${metodoPago === 'mercado_pago' ? 'Mercado Pago' : 'Transferencia Bancaria'}
+• Código: ${datos.codigo}
+
+📝 DESCRIPCIÓN DEL CASO:
+"${datos.datosCliente.descripcion}"
+
+🔗 LINK PARA QUE EL CLIENTE AGENDE:
+${window.location.origin}${window.location.pathname}?codigo=${datos.codigo}
+
+✅ ESTADO: Pago confirmado - Pendiente de agendar`;
+
+    try {
+        await fetch('https://script.google.com/macros/s/AKfycbxP1cBaISyI4rMOjveCcPNtwNdxekMeWEmoucsOdztdedR6tt8B3JTLbIfWPUrMDXK1Hw/exec', {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                tipo: 'reserva_confirmada',
+                codigo: datos.codigo,
+                email_cliente: datos.datosCliente.email,
+                email_abogada: 'mguadalupesalva@gmail.com',
+                asunto_cliente: `✅ Reserva confirmada - ${datos.codigo}`,
+                asunto_abogada: `💰 NUEVA RESERVA - ${datos.codigo}`,
+                mensaje_cliente: emailCliente,
+                mensaje_abogada: emailAbogada,
+                datos_completos: datos
+            })
+        });
+        
+        console.log('✅ Email de reserva enviado');
+        
+    } catch (error) {
+        console.error('Error al enviar email de reserva:', error);
+        // Mostrar mensaje al usuario
+        alert('✅ Reserva registrada. Si no recibe el email en 5 minutos, revise su bandeja de SPAM o contáctenos.');
+    }
+}
+    
 document.getElementById('formPreReserva').addEventListener('submit', function(e) {
     e.preventDefault();
     
@@ -1757,88 +1943,53 @@ function mostrarMetodosPago() {
         ? 'linear-gradient(135deg, #3f4f8f 0%, #2c3e6d 100%)' 
         : 'linear-gradient(135deg, #4CAF50 0%, #2e7d32 100%)';
     const modalTitle = isPresencial 
-        ? `<i class="fas fa-lock"></i> Método de pago - Cita PRESENCIAL`
-        : `<i class="fas fa-lock"></i> Método de pago - Cita ONLINE`;
+        ? `<i class="fas fa-lock"></i> Método de pago - Consulta PRESENCIAL`
+        : `<i class="fas fa-lock"></i> Método de pago - Consulta ONLINE`;
 
     const html = `
-        <div style="background:white; border-radius:16px; overflow:hidden;">
-            <div style="background: ${headerColor}; color:white; padding:1.5rem; display:flex; justify-content:space-between; align-items:center;">
-                <div>
-                    <h3 style="margin:0; font-size:1.3rem; display:flex; align-items:center; gap:0.8rem;">
-                        ${modalTitle}
-                    </h3>
-                    <p style="margin:0.5rem 0 0 0; opacity:0.9; font-size:0.9rem;">
-                        Código: ${preReservaActual.codigo}
-                    </p>
+    <div style="background:white; border-radius:16px; overflow:hidden;">
+        <div style="background: ${headerColor}; color:white; padding:1.5rem; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+                <h3 style="margin:0; font-size:1.3rem; display:flex; align-items:center; gap:0.8rem;">
+                    <i class="fas fa-lock"></i> Método de pago
+                </h3>
+                <p style="margin:0.5rem 0 0 0; opacity:0.9; font-size:0.9rem;">
+                    Código: ${preReservaActual.codigo}
+                </p>
+            </div>
+        </div>
+        
+        <div style="padding:1.5rem; background:#f9f9f9;">
+            <div style="text-align:center; margin-bottom:1.5rem;">
+                <div style="font-size:0.9rem; color:#666;">Pago completo de la consulta</div>
+                <div style="font-size:2.5rem; font-weight:700; color:${isPresencial ? '#2c3e6d' : '#2e7d32'};">
+                    $${preReservaActual.monto.toLocaleString('es-AR')}
                 </div>
-                <button onclick="cerrarMetodosPago()" style="background:rgba(255,255,255,0.2); color:white; border:none; width:36px; height:36px; border-radius:50%; font-size:1.5rem; cursor:pointer;">
-                    ×
+                <div style="font-size:0.85rem; color:#666;">
+                    ${isPresencial ? 'Consulta presencial de 60 minutos' : 'Consulta online de 60 minutos'}
+                </div>
+            </div>
+            
+            <div style="margin-bottom:1.5rem;">
+                <button onclick="pagarConMercadoPago()"
+                        style="width:100%; background:linear-gradient(90deg, #009ee3 0%, #0077b6 100%); color:white; border:none; padding:1.2rem 1.5rem; border-radius:10px; font-weight:600; font-size:1.1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:1rem; margin-bottom:1rem;">
+                    <i class="fas fa-credit-card"></i>
+                    Pagar con Mercado Pago
+                </button>
+                
+                <button onclick="pagarConTransferencia()"
+                        style="width:100%; background:linear-gradient(90deg, #4CAF50 0%, #2e7d32 100%); color:white; border:none; padding:1.2rem 1.5rem; border-radius:10px; font-weight:600; font-size:1.1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:1rem;">
+                    <i class="fas fa-university"></i>
+                    Pagar por Transferencia
                 </button>
             </div>
             
-            <div style="padding:1.5rem; background:#f9f9f9;">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-                    <div>
-                        <div style="font-size:0.9rem; color:#666;">Tipo de consulta</div>
-                        <div style="font-weight:600; color:#2d2d2d;">
-                            ${getNombreTipoConsulta(preReservaActual.datosCliente.tipoConsulta)}
-                        </div>
-                    </div>
-                    <div style="text-align:right;">
-                        <div style="font-size:0.9rem; color:#666;">Seña requerida</div>
-                        <div style="font-size:1.8rem; font-weight:700; color:${isPresencial ? '#2c3e6d' : '#2e7d32'};">
-                            $${preReservaActual.monto.toLocaleString('es-AR')}
-                        </div>
-                    </div>
-                </div>
-                <div style="font-size:0.85rem; color:#666; background:white; padding:1rem; border-radius:8px; border-left:4px solid ${isPresencial ? '#3f4f8f' : '#4CAF50'};">
-                    <i class="fas fa-info-circle" style="color:${isPresencial ? '#3f4f8f' : '#4CAF50'}"></i> 
-                    La seña será descontada del total de honorarios.
-                </div>
-            </div>
-            
-            <div style="padding:1.5rem;">
-                <h4 style="color:#2d2d2d; margin-bottom:1.5rem; text-align:center;">
-                    Seleccione cómo pagar la seña
-                </h4>
-                
-                <div style="display:flex; flex-direction:column; gap:1rem;">
-                    <button onclick="pagarConMercadoPago()"
-                            style="display:flex; align-items:center; gap:1.5rem; background:linear-gradient(90deg, #009ee3 0%, #0077b6 100%); color:white; border:none; padding:1.2rem 1.5rem; border-radius:10px; font-weight:600; font-size:1.1rem; cursor:pointer; text-align:left; transition:all 0.3s;">
-                        <div style="background:rgba(255,255,255,0.2); width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center;">
-                            <i class="fas fa-credit-card" style="font-size:1.5rem;"></i>
-                        </div>
-                        <div style="flex:1;">
-                            <div>Mercado Pago</div>
-                            <div style="font-size:0.9rem; opacity:0.9; font-weight:normal;">
-                                Tarjetas, efectivo o transferencia
-                            </div>
-                        </div>
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                    
-                    <button onclick="pagarConTransferencia()"
-                            style="display:flex; align-items:center; gap:1.5rem; background:linear-gradient(90deg, #4CAF50 0%, #2e7d32 100%); color:white; border:none; padding:1.2rem 1.5rem; border-radius:10px; font-weight:600; font-size:1.1rem; cursor:pointer; text-align:left; transition:all 0.3s;">
-                        <div style="background:rgba(255,255,255,0.2); width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center;">
-                            <i class="fas fa-university" style="font-size:1.5rem;"></i>
-                        </div>
-                        <div style="flex:1;">
-                            <div>Transferencia Bancaria</div>
-                            <div style="font-size:0.9rem; opacity:0.9; font-weight:normal;">
-                                Banco Nación o Santander
-                            </div>
-                        </div>
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
-                
-                <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid #eee;">
-                    <p style="font-size:0.85rem; color:#666; text-align:center;">
-                        <i class="fas fa-shield-alt"></i> Ambos métodos son 100% seguros
-                    </p>
-                </div>
+            <div style="font-size:0.85rem; color:#666; background:white; padding:1rem; border-radius:8px; border-left:4px solid ${isPresencial ? '#3f4f8f' : '#4CAF50'};">
+                <i class="fas fa-info-circle" style="color:${isPresencial ? '#3f4f8f' : '#4CAF50'}"></i> 
+                Una vez confirmado el pago, podrá seleccionar fecha y hora disponible.
             </div>
         </div>
+    </div>
     `;
     
     container.innerHTML = html;
@@ -1867,16 +2018,42 @@ function getNombreTipoConsulta(tipo) {
 // FUNCIONES DE PAGO
 // ==============================
 async function pagarConMercadoPago() {
-    await enviarPreReservaAlServidor('mercado_pago');
-    const linkPago = paymentLinks[preReservaActual.tipoCita];
-    window.open(linkPago, '_blank');
-    mostrarInstruccionesMercadoPago();
+    try {
+        // 1. Registrar la reserva
+        await enviarPreReservaAlServidor('mercado_pago');
+        
+        // 2. Enviar email de confirmación
+        await enviarEmailPagoConfirmado('mercado_pago');
+        
+        // 3. Redirigir a Mercado Pago
+        const linkPago = paymentLinks[preReservaActual.tipoCita];
+        window.open(linkPago, '_blank');
+        
+        // 4. Mostrar instrucciones
+        mostrarInstruccionesMercadoPago();
+        
+    } catch (error) {
+        console.error('Error en pago Mercado Pago:', error);
+        alert('❌ Error al procesar el pago. Por favor intente nuevamente.');
+    }
 }
 
 async function pagarConTransferencia() {
-    await enviarPreReservaAlServidor('transferencia');
-    cerrarMetodosPago();
-    mostrarDatosBancarios();
+    try {
+        // 1. Registrar la reserva
+        await enviarPreReservaAlServidor('transferencia');
+        
+        // 2. Enviar email de confirmación
+        await enviarEmailPagoConfirmado('transferencia');
+        
+        // 3. Cerrar modal y mostrar datos bancarios
+        cerrarMetodosPago();
+        mostrarDatosBancarios();
+        
+    } catch (error) {
+        console.error('Error en pago por transferencia:', error);
+        alert('❌ Error al procesar la reserva. Por favor intente nuevamente.');
+    }
 }
 
 async function enviarPreReservaAlServidor(metodoPago) {
@@ -1891,7 +2068,7 @@ async function enviarPreReservaAlServidor(metodoPago) {
     };
     
     try {
-        await fetch('https://script.google.com/macros/s/AKfycbwc_1s16BjjK3I01sQky08KHF8myG-fSfvJ1s43gwEODR8xjOqD-6Et6BRkaxmFgYjDKw/exec', {
+        await fetch('https://script.google.com/macros/s/AKfycbxP1cBaISyI4rMOjveCcPNtwNdxekMeWEmoucsOdztdedR6tt8B3JTLbIfWPUrMDXK1Hw/exec', {
             method: 'POST',
             mode: 'no-cors',
             headers: { 'Content-Type': 'application/json' },
@@ -1917,11 +2094,11 @@ async function enviarEmailsPreReserva(metodoPago) {
     const datos = preReservaActual;
     
     const emailCliente = `
-📋 PRE-RESERVA CONFIRMADA - ${datos.codigo}
+📋 RESERVA CONFIRMADA - ${datos.codigo}
 
 ¡Hola ${datos.datosCliente.nombre}!
 
-Gracias por su interés en nuestros servicios legales. Hemos registrado su pre-reserva con los siguientes detalles:
+Gracias por su interés en nuestros servicios legales. Hemos registrado su reserva con los siguientes detalles:
 
 🔹 **Detalles de la pre-reserva:**
 • Código: ${datos.codigo}
@@ -1955,14 +2132,14 @@ ${window.location.origin}${window.location.pathname}?codigo=${datos.codigo}
 
 📞 **Contacto de emergencia:**
 WhatsApp: 351 7079452
-Email: oficinalegal.salva@gmail.com
+Email: mguadalupesalva@gmail.com
 
 Atentamente,
 M. Guadalupe Salva
-Centro de Servicios Legales`;
+Abogada`;
     
     const emailAbogada = `
-🚨 NUEVA PRE-RESERVA RECIBIDA - ${datos.codigo}
+🚨 NUEVA RESERVA RECIBIDA - ${datos.codigo}
 
 📅 **FECHA:** ${new Date().toLocaleString('es-AR')}
 🔢 **CÓDIGO:** ${datos.codigo}
@@ -1993,7 +2170,7 @@ ${metodoPago === 'mercado_pago'
     : 'Verificar transferencia cuando el cliente envíe comprobante'}`;
     
     try {
-        await fetch('https://script.google.com/macros/s/AKfycbwc_1s16BjjK3I01sQky08KHF8myG-fSfvJ1s43gwEODR8xjOqD-6Et6BRkaxmFgYjDKw/exec', {
+        await fetch('https://script.google.com/macros/s/AKfycbxP1cBaISyI4rMOjveCcPNtwNdxekMeWEmoucsOdztdedR6tt8B3JTLbIfWPUrMDXK1Hw/exec', {
             method: 'POST',
             mode: 'no-cors',
             headers: { 'Content-Type': 'application/json' },
@@ -2001,9 +2178,9 @@ ${metodoPago === 'mercado_pago'
                 tipo: 'email_pre_reserva',
                 codigo: datos.codigo,
                 email_cliente: datos.datosCliente.email,
-                email_abogada: 'oficinalegal.salva@gmail.com',
-                asunto_cliente: `Pre-reserva confirmada - ${datos.codigo}`,
-                asunto_abogada: `🚨 NUEVA PRE-RESERVA - ${datos.codigo}`,
+                email_abogada: 'mguadalupesalva@gmail.com',
+                asunto_cliente: `✅ Reserva confirmada - ${datos.codigo}`,
+                asunto_abogada: `💰 NUEVA RESERVA - ${datos.codigo}`,
                 mensaje_cliente: emailCliente,
                 mensaje_abogada: emailAbogada,
                 datos_completos: datos
@@ -2450,28 +2627,62 @@ function mostrarPantallaContinuarReserva(codigo, datosReserva) {
     document.body.style.overflow = 'hidden';
 }
 
-function abrirCalendlyConReserva(tipoCita, codigo) {
+function abrirCalendlyConReserva(tipoCita, codigo, datosCliente) {
     cerrarContinuarReserva();
-    openCalendly(tipoCita, codigo);
     
-    setTimeout(() => {
-        const datosReserva = localStorage.getItem(`pre_reserva_${codigo}`);
-        if (datosReserva) {
-            const reserva = JSON.parse(datosReserva);
-            const mensaje = document.createElement('div');
-            mensaje.innerHTML = `
-            <div style="background:#e8f5e9; color:#2d5e3e; padding:12px; border-radius:8px; margin:15px 0; border-left:4px solid #4CAF50; font-size:0.95rem;">
-                <i class="fas fa-info-circle"></i> 
-                Reserva: ${codigo} - ${reserva.datos_cliente.nombre}
-            </div>
-            `;
-            
-            const calendlyContainer = document.getElementById('calendlyContainer');
-            if (calendlyContainer) {
-                calendlyContainer.parentNode.insertBefore(mensaje, calendlyContainer);
+    const urlCalendly = calendlyUrls[tipoCita];
+    
+    // Construir URL con parámetros para Calendly
+    let urlFinal = `${urlCalendly}?`;
+    urlFinal += `name=${encodeURIComponent(datosCliente.nombre)}`;
+    urlFinal += `&email=${encodeURIComponent(datosCliente.email)}`;
+    urlFinal += `&a1=${encodeURIComponent(codigo)}`;  // Código de reserva
+    urlFinal += `&a2=${encodeURIComponent(datosCliente.tipoConsulta)}`;  // Tipo consulta
+    urlFinal += `&a3=${encodeURIComponent(tipoCita)}`;  // Modalidad
+    
+    // Abrir Calendly con la URL personalizada
+    openCalendlyCustom(urlFinal, codigo, datosCliente);
+}
+
+function openCalendlyCustom(url, codigo, datosCliente) {
+    const c = document.getElementById('calendlyContainer');
+    const cancelBtn = document.getElementById('cancelCalendlyBtn');
+    
+    if (cancelBtn) cancelBtn.style.display = 'block';
+    
+    const cancelButton = cancelBtn ? cancelBtn.querySelector('button') : null;
+    if (cancelButton) {
+        cancelButton.onclick = closeCalendly;
+    }
+    
+    c.innerHTML = "";
+    c.style.display = 'block';
+    
+    const widgetDiv = document.createElement('div');
+    widgetDiv.id = 'calendlyWidgetDynamic';
+    widgetDiv.style.width = '100%';
+    widgetDiv.style.minHeight = '800px';
+    widgetDiv.style.height = '800px';
+    c.appendChild(widgetDiv);
+    
+    // Configurar datos iniciales para Calendly
+    const calendlyConfig = {
+        url: url,
+        parentElement: widgetDiv,
+        prefill: {
+            name: datosCliente.nombre,
+            email: datosCliente.email,
+            customAnswers: {
+                a1: codigo,
+                a2: datosCliente.tipoConsulta,
+                a3: datosCliente.tipoCita || 'online'
             }
         }
-    }, 1000);
+    };
+    
+    Calendly.initInlineWidget(calendlyConfig);
+    
+    c.scrollIntoView({ behavior: 'smooth' });
 }
 
 function cerrarContinuarReserva() {
@@ -2598,7 +2809,7 @@ function initializeFormEvents() {
             messageDiv.style.display = 'block';
             
             try {
-                const scriptURL = 'https://script.google.com/macros/s/AKfycbwc_1s16BjjK3I01sQky08KHF8myG-fSfvJ1s43gwEODR8xjOqD-6Et6BRkaxmFgYjDKw/exec';
+                const scriptURL = 'https://script.google.com/macros/s/AKfycbxP1cBaISyI4rMOjveCcPNtwNdxekMeWEmoucsOdztdedR6tt8B3JTLbIfWPUrMDXK1Hw/exec';
                 
                 await fetch(scriptURL, {
                     method: 'POST',
@@ -2710,7 +2921,7 @@ END:VCARD`;
     const b=new Blob([v],{type:'text/vcard;charset=utf-8'});
     const a=document.createElement('a');
     a.href=URL.createObjectURL(b);
-    a.download='M_Guadalupe_Salva.vcf';
+    a.download='MGuadalupeSalva.vcf';
     a.click();
 }
 
@@ -2824,6 +3035,4 @@ function cerrarInstruccionesMP() {
 }
 </script>
 </body>
-
 </html>
-

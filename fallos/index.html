@@ -1,1 +1,1669 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Carga de Fallos Judiciales</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Variables y Reset - TAMAÑOS REDUCIDOS */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --border-color: #bdc3c7;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --border-radius: 6px;
+            --transition: all 0.2s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.5;
+            padding: 15px;
+            font-size: 14px;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        /* Header - MÁS COMPACTO */
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+        
+        .header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Form Sections - MÁS COMPACTAS */
+        .form-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .form-section:hover {
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 18px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .section-title i {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+        
+        /* Form Layout - MÁS COMPACTO */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: var(--secondary-color);
+            font-size: 0.95rem;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .required::after {
+            content: " *";
+            color: var(--danger-color);
+        }
+        
+        input[type="text"],
+        input[type="date"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            background-color: white;
+        }
+        
+        input[type="text"]:focus,
+        input[type="date"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.15);
+        }
+        
+        /* Estilo especial para selects con opción "Otro" */
+        select option[value="otro"] {
+            font-style: italic;
+            color: #666;
+        }
+        
+        /* Estilo para campos de texto cuando se selecciona "Otro" */
+        .custom-input {
+            margin-top: 10px;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        /* Radio and Checkbox Groups - MÁS COMPACTOS */
+        .option-group {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            border: 1px solid #e9ecef;
+        }
+        
+        .option-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .option-title i {
+            color: var(--accent-color);
+            font-size: 1rem;
+        }
+        
+        .options-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 10px;
+        }
+        
+        .checkbox-option,
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px;
+            background: white;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .checkbox-option:hover,
+        .radio-option:hover {
+            border-color: var(--accent-color);
+            background-color: #f0f8ff;
+        }
+        
+        .checkbox-option input,
+        .radio-option input {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+        
+        .checkbox-option label,
+        .radio-option label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: normal;
+            flex: 1;
+            font-size: 0.9rem;
+        }
+        
+        /* Specific Styles for Methodological Sections */
+        .method-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        
+        /* Collapsible Sections - MÁS COMPACTOS */
+        .collapsible {
+            margin-bottom: 15px;
+        }
+        
+        .collapsible-header {
+            background: var(--light-color);
+            padding: 12px 15px;
+            border-radius: var(--border-radius);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary-color);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+        
+        .collapsible-header:hover {
+            background: #dfe6e9;
+        }
+        
+        .collapsible-header i {
+            transition: transform 0.2s ease;
+            font-size: 0.9rem;
+        }
+        
+        .collapsible-header.active i {
+            transform: rotate(180deg);
+        }
+        
+        .collapsible-content {
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-top: none;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            background: white;
+            display: none;
+        }
+        
+        .collapsible-content.active {
+            display: block;
+        }
+        
+        /* Conditional Sections */
+        .conditional-section {
+            border-left: 4px solid var(--accent-color);
+            padding-left: 15px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            background-color: #f9fafb;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            padding: 15px;
+            display: none;
+        }
+        
+        .conditional-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        /* Sub-secciones */
+        .sub-section {
+            background: #f0f2f5;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-top: 10px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .sub-section-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+        
+        /* Buttons - MÁS COMPACTOS */
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            padding: 15px;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-width: 160px;
+        }
+        
+        .btn-submit {
+            background: var(--success-color);
+            color: white;
+        }
+        
+        .btn-submit:hover {
+            background: #219653;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .btn-reset {
+            background: var(--danger-color);
+            color: white;
+        }
+        
+        .btn-reset:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .btn-export {
+            background: var(--accent-color);
+            color: white;
+        }
+        
+        .btn-export:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .header {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .header p {
+                font-size: 0.85rem;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-section {
+                padding: 15px;
+            }
+            
+            .section-title {
+                font-size: 1.2rem;
+                margin-bottom: 15px;
+            }
+            
+            .options-container,
+            .method-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .buttons-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 250px;
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Status Messages - MÁS COMPACTOS */
+        .status-message {
+            padding: 12px 15px;
+            border-radius: var(--border-radius);
+            margin-bottom: 15px;
+            display: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .status-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        /* Footer - MÁS COMPACTO */
+        .footer {
+            text-align: center;
+            margin-top: 35px;
+            padding: 15px;
+            color: #7f8c8d;
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        /* Helper Text - MÁS COMPACTO */
+        .helper-text {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            margin-top: 4px;
+            font-style: italic;
+        }
+        
+        /* Scrollbar más delgada para ahorrar espacio visual */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-gavel"></i> Sistema de Carga de Fallos Judiciales</h1>
+            <p>Complete el formulario para registrar y analizar fallos judiciales de manera sistemática</p>
+        </header>
+        
+        <div id="statusMessage" class="status-message"></div>
+        
+        <form id="fallosForm">
+            <!-- SECCIÓN 1: IDENTIFICACIÓN DEL FALLO -->
+            <section class="form-section">
+                <h2 class="section-title"><i class="fas fa-id-card"></i> 1. Identificación del fallo</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="caratula" class="required">Carátula</label>
+                        <input type="text" id="caratula" name="caratula" required placeholder="Ej: 'Pérez, Juan c/ Estado Nacional'">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fallos" class="required">Fallos (tomo/página)</label>
+                        <input type="text" id="fallos" name="fallos" required placeholder="Ej: 'Fallos: 336:1234'">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fecha" class="required">Fecha</label>
+                        <input type="date" id="fecha" name="fecha" required>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SECCIÓN 2: COMPOSICIÓN DEL TRIBUNAL -->
+            <section class="form-section">
+                <h2 class="section-title"><i class="fas fa-gavel"></i> 2. Composición del Tribunal</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="integracion" class="required">Integración de la Corte</label>
+                        <textarea id="integracion" name="integracion" required placeholder="Liste los miembros del tribunal..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">Voto</label>
+                        <div class="option-group">
+                            <div class="options-container">
+                                <div class="radio-option">
+                                    <input type="radio" id="voto-unanimidad" name="voto" value="unanimidad" required onclick="toggleDisidencias(false)">
+                                    <label for="voto-unanimidad">Unanimidad</label>
+                                </div>
+                                
+                                <div class="radio-option">
+                                    <input type="radio" id="voto-mayoria" name="voto" value="mayoria" onclick="toggleDisidencias(false)">
+                                    <label for="voto-mayoria">Mayoría</label>
+                                </div>
+                                
+                                <div class="radio-option">
+                                    <input type="radio" id="voto-disidencias" name="voto" value="disidencias" onclick="toggleDisidencias(true)">
+                                    <label for="voto-disidencias">Disidencias (indicar cuáles)</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="disidenciasContainer" class="conditional-section">
+                            <label for="detalleDisidencias" class="required">Detalle de las disidencias</label>
+                            <textarea id="detalleDisidencias" name="detalleDisidencias" required placeholder="Indique qué jueces disentieron y los fundamentos de sus disidencias..."></textarea>
+                            <div class="helper-text">Ej: "El juez Martínez disiente en el considerando 5 sobre la interpretación del artículo 14..."</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SECCIÓN 3: TEMA JURÍDICO CENTRAL -->
+            <section class="form-section">
+                <h2 class="section-title"><i class="fas fa-book"></i> 3. Tema jurídico central</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="materia" class="required">Materia principal</label>
+                        <select id="materia" name="materia" required onchange="toggleCustomMateria(this)">
+                            <option value="" disabled selected>Seleccione una materia</option>
+                            <option value="derecho_civil">Derecho Civil</option>
+                            <option value="derecho_comercial">Derecho Comercial</option>
+                            <option value="derecho_penal">Derecho Penal</option>
+                            <option value="derecho_laboral">Derecho Laboral</option>
+                            <option value="derecho_administrativo">Derecho Administrativo</option>
+                            <option value="derecho_constitucional">Derecho Constitucional</option>
+                            <option value="derecho_internacional">Derecho Internacional</option>
+                            <option value="derecho_tributario">Derecho Tributario</option>
+                            <option value="derecho_procesal">Derecho Procesal</option>
+                            <option value="derecho_ambiental">Derecho Ambiental</option>
+                            <option value="derecho_de_familia">Derecho de Familia</option>
+                            <option value="derecho_sucesorio">Derecho Sucesorio</option>
+                            <option value="derecho_consumidor">Derecho del Consumidor</option>
+                            <option value="derecho_minero">Derecho Minero</option>
+                            <option value="derecho_agrario">Derecho Agrario</option>
+                            <option value="otro">Otro (especificar)</option>
+                        </select>
+                        <div id="customMateriaContainer" class="custom-input">
+                            <label for="customMateria" class="required">Especifique la materia:</label>
+                            <input type="text" id="customMateria" name="customMateria" placeholder="Ingrese la materia principal...">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subtema">Subtema</label>
+                        <select id="subtema" name="subtema" onchange="toggleCustomSubtema(this)">
+                            <option value="" selected>Seleccione un subtema (opcional)</option>
+                            <option value="responsabilidad_civil">Responsabilidad Civil</option>
+                            <option value="daños_perjuicios">Daños y Perjuicios</option>
+                            <option value="contratos">Contratos</option>
+                            <option value="propiedad">Propiedad</option>
+                            <option value="obligaciones">Obligaciones</option>
+                            <option value="derechos_reales">Derechos Reales</option>
+                            <option value="derecho_sucesiones">Sucesiones</option>
+                            <option value="derecho_familia">Familia</option>
+                            <option value="derecho_patrimonial">Patrimonial</option>
+                            <option value="acciones_colectivas">Acciones Colectivas</option>
+                            <option value="amparo">Amparo</option>
+                            <option value="habeas_corpus">Habeas Corpus</option>
+                            <option value="proceso_ejecutivo">Proceso Ejecutivo</option>
+                            <option value="proceso_cautelar">Proceso Cautelar</option>
+                            <option value="recursos">Recursos</option>
+                            <option value="prueba">Prueba</option>
+                            <option value="prescripcion">Prescripción</option>
+                            <option value="caducidad">Caducidad</option>
+                            <option value="otro">Otro (especificar)</option>
+                        </select>
+                        <div id="customSubtemaContainer" class="custom-input">
+                            <label for="customSubtema">Especifique el subtema:</label>
+                            <input type="text" id="customSubtema" name="customSubtema" placeholder="Ingrese el subtema...">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SECCIÓN 4: CUESTIÓN FEDERAL PLANTEADA -->
+            <section class="form-section">
+                <h2 class="section-title"><i class="fas fa-landmark"></i> 4. Cuestión federal planteada</h2>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label for="cuestioneFederal" class="required">Descripción de la cuestión federal</label>
+                        <textarea id="cuestioneFederal" name="cuestioneFederal" required placeholder="Describa la cuestión federal planteada en el fallo..."></textarea>
+                        <div class="helper-text">Ej: Conflicto entre normas federales y provinciales, aplicación de tratados internacionales, etc.</div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SECCIÓN 5: TIPO DE DESACUERDO -->
+            <section class="form-section">
+                <h2 class="section-title"><i class="fas fa-exclamation-triangle"></i> 5. Tipo de desacuerdo</h2>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <div class="option-group">
+                            <div class="options-container">
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="desacuerdo-normativo" name="tipoDesacuerdo" value="normativo">
+                                    <label for="desacuerdo-normativo">Normativo</label>
+                                </div>
+                                
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="desacuerdo-factico" name="tipoDesacuerdo" value="factico">
+                                    <label for="desacuerdo-factico">Fáctico</label>
+                                </div>
+                                
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="desacuerdo-mixto" name="tipoDesacuerdo" value="mixto">
+                                    <label for="desacuerdo-mixto">Mixto</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SECCIÓN 6: TIPO DE PROBLEMA JURÍDICO -->
+            <section class="form-section">
+                <h2 class="section-title"><i class="fas fa-question-circle"></i> 6. Tipo de problema jurídico</h2>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <div class="option-group">
+                            <div class="options-container">
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="problema-constitucionalidad" name="problemaJuridico" value="constitucionalidad" onclick="toggleProbatorio(false)">
+                                    <label for="problema-constitucionalidad">Constitucionalidad de norma</label>
+                                </div>
+                                
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="problema-interpretativo" name="problemaJuridico" value="interpretativo" onclick="toggleProbatorio(false)">
+                                    <label for="problema-interpretativo">Interpretativo</label>
+                                </div>
+                                
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="problema-probatorio" name="problemaJuridico" value="probatorio" onclick="toggleProbatorio(true)">
+                                    <label for="problema-probatorio">Probatorio</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Sub-sección condicional para Probatorio -->
+                        <div id="probatorioContainer" class="conditional-section">
+                            <div class="sub-section">
+                                <div class="sub-section-title">
+                                    <i class="fas fa-clipboard-check"></i> i. Rol de la prueba en la decisión
+                                </div>
+                                <div class="options-container">
+                                    <div class="radio-option">
+                                        <input type="radio" id="prueba-central" name="rolPrueba" value="central">
+                                        <label for="prueba-central">Central</label>
+                                    </div>
+                                    
+                                    <div class="radio-option">
+                                        <input type="radio" id="prueba-secundario" name="rolPrueba" value="secundario">
+                                        <label for="prueba-secundario">Secundario</label>
+                                    </div>
+                                    
+                                    <div class="radio-option">
+                                        <input type="radio" id="prueba-marginal" name="rolPrueba" value="marginal">
+                                        <label for="prueba-marginal">Marginal</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="sub-section">
+                                <div class="sub-section-title">
+                                    <i class="fas fa-brain"></i> ii. Tipo de inferencias probatorias detectadas
+                                </div>
+                                <div class="method-grid">
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="inferencia-inductivas" name="tipoInferencias" value="inductivas">
+                                        <label for="inferencia-inductivas">Inductivas</label>
+                                    </div>
+                                    
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="inferencia-maximas" name="tipoInferencias" value="maximas_experiencia">
+                                        <label for="inferencia-maximas">Máximas de experiencia</label>
+                                    </div>
+                                    
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="inferencia-presunciones-legales" name="tipoInferencias" value="presunciones_legales">
+                                        <label for="inferencia-presunciones-legales">Presunciones legales</label>
+                                    </div>
+                                    
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="inferencia-presunciones-judiciales" name="tipoInferencias" value="presunciones_judiciales">
+                                        <label for="inferencia-presunciones-judiciales">Presunciones judiciales</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SECCIÓN 7: MÉTODO INTERPRETATIVO UTILIZADO -->
+            <section class="form-section">
+                <h2 class="section-title"><i class="fas fa-search"></i> 7. Método interpretativo utilizado</h2>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <div class="method-grid">
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="metodo-literal" name="metodoInterpretativo" value="literal">
+                                <label for="metodo-literal">Literal</label>
+                            </div>
+                            
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="metodo-sistematico" name="metodoInterpretativo" value="sistematico">
+                                <label for="metodo-sistematico">Sistemático</label>
+                            </div>
+                            
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="metodo-teleologico" name="metodoInterpretativo" value="teleologico">
+                                <label for="metodo-teleologico">Teleológico</label>
+                            </div>
+                            
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="metodo-historico" name="metodoInterpretativo" value="historico">
+                                <label for="metodo-historico">Histórico</label>
+                            </div>
+                            
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="metodo-principialista" name="metodoInterpretativo" value="principialista">
+                                <label for="metodo-principialista">Principialista</label>
+                            </div>
+                            
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="metodo-acontrario" name="metodoInterpretativo" value="a_contrario">
+                                <label for="metodo-acontrario">A contrario</label>
+                            </div>
+                            
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="metodo-afortiori" name="metodoInterpretativo" value="a_fortiori">
+                                <label for="metodo-afortiori">A fortiori</label>
+                            </div>
+                            
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="metodo-analogico" name="metodoInterpretativo" value="analogico">
+                                <label for="metodo-analogico">Analógico</label>
+                            </div>
+                            
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="metodo-reduccion" name="metodoInterpretativo" value="reduccion_absurdo">
+                                <label for="metodo-reduccion">Reducción al absurdo</label>
+                            </div>
+                            
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="metodo-coherencia" name="metodoInterpretativo" value="coherencia_sistema">
+                                <label for="metodo-coherencia">Coherencia del sistema</label>
+                            </div>
+                            
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="metodo-unidad" name="metodoInterpretativo" value="unidad_constitucion">
+                                <label for="metodo-unidad">Unidad de la Constitución</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SECCIÓN 8: ARGUMENTOS DE PONDERACIÓN -->
+            <section class="form-section">
+                <h2 class="section-title"><i class="fas fa-weight-hanging"></i> 8. Argumentos de ponderación (Alexy/Maccormick)</h2>
+                
+                <!-- 8a. Colisión de principios -->
+                <div class="collapsible">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <span>a. ¿Hay colisión de principios?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <div class="options-container">
+                                    <div class="radio-option">
+                                        <input type="radio" id="colision-no" name="colisionPrincipios" value="no" onclick="togglePrincipiosContainer(false)">
+                                        <label for="colision-no">No</label>
+                                    </div>
+                                    
+                                    <div class="radio-option">
+                                        <input type="radio" id="colision-si" name="colisionPrincipios" value="si" onclick="togglePrincipiosContainer(true)">
+                                        <label for="colision-si">Sí</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="principiosContainer" class="conditional-section">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="principioA" class="required">Principio A</label>
+                                        <select id="principioA" name="principioA" onchange="toggleCustomPrincipioA(this)">
+                                            <option value="" selected>Seleccione un principio</option>
+                                            <option value="autonomia_voluntad">Autonomía de la voluntad</option>
+                                            <option value="buena_fe">Buena fe</option>
+                                            <option value="igualdad">Igualdad</option>
+                                            <option value="libertad">Libertad</option>
+                                            <option value="seguridad_juridica">Seguridad jurídica</option>
+                                            <option value="proporcionalidad">Proporcionalidad</option>
+                                            <option value="razonabilidad">Razonabilidad</option>
+                                            <option value="legalidad">Legalidad</option>
+                                            <option value="dignidad_humana">Dignidad humana</option>
+                                            <option value="debido_proceso">Debido proceso</option>
+                                            <option value="defensa_en_juicio">Defensa en juicio</option>
+                                            <option value="publicidad">Publicidad</option>
+                                            <option value="economia_procesal">Economía procesal</option>
+                                            <option value="celeridad">Celeridad</option>
+                                            <option value="otro">Otro principio (especificar)</option>
+                                        </select>
+                                        <div id="customPrincipioAContainer" class="custom-input">
+                                            <label for="customPrincipioA" class="required">Especifique el principio:</label>
+                                            <input type="text" id="customPrincipioA" name="customPrincipioA" placeholder="Ingrese el principio A...">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="principioB" class="required">Principio B</label>
+                                        <select id="principioB" name="principioB" onchange="toggleCustomPrincipioB(this)">
+                                            <option value="" selected>Seleccione un principio</option>
+                                            <option value="autonomia_voluntad">Autonomía de la voluntad</option>
+                                            <option value="buena_fe">Buena fe</option>
+                                            <option value="igualdad">Igualdad</option>
+                                            <option value="libertad">Libertad</option>
+                                            <option value="seguridad_juridica">Seguridad jurídica</option>
+                                            <option value="proporcionalidad">Proporcionalidad</option>
+                                            <option value="razonabilidad">Razonabilidad</option>
+                                            <option value="legalidad">Legalidad</option>
+                                            <option value="dignidad_humana">Dignidad humana</option>
+                                            <option value="debido_proceso">Debido proceso</option>
+                                            <option value="defensa_en_juicio">Defensa en juicio</option>
+                                            <option value="publicidad">Publicidad</option>
+                                            <option value="economia_procesal">Economía procesal</option>
+                                            <option value="celeridad">Celeridad</option>
+                                            <option value="otro">Otro principio (especificar)</option>
+                                        </select>
+                                        <div id="customPrincipioBContainer" class="custom-input">
+                                            <label for="customPrincipioB" class="required">Especifique el principio:</label>
+                                            <input type="text" id="customPrincipioB" name="customPrincipioB" placeholder="Ingrese el principio B...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 8b. Estructura de la ponderación -->
+                <div class="collapsible">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <span>b. Estructura de la ponderación</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <div class="method-grid">
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="ponderacion-idoneidad" name="estructuraPonderacion" value="idoneidad">
+                                        <label for="ponderacion-idoneidad">Idoneidad</label>
+                                    </div>
+                                    
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="ponderacion-necesidad" name="estructuraPonderacion" value="necesidad">
+                                        <label for="ponderacion-necesidad">Necesidad</label>
+                                    </div>
+                                    
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="ponderacion-proporcionalidad" name="estructuraPonderacion" value="proporcionalidad_estricta">
+                                        <label for="ponderacion-proporcionalidad">Proporcionalidad estricta</label>
+                                    </div>
+                                    
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="ponderacion-formula" name="estructuraPonderacion" value="formula_peso">
+                                        <label for="ponderacion-formula">Fórmula del peso implícita</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 8c. Tipo de razonamiento -->
+                <div class="collapsible">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <span>c. Tipo de razonamiento</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <div class="options-container">
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="razonamiento-balance-explicito" name="tipoRazonamiento" value="balance_explicito">
+                                        <label for="razonamiento-balance-explicito">Balance explícito</label>
+                                    </div>
+                                    
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="razonamiento-balance-implicito" name="tipoRazonamiento" value="balance_implicito">
+                                        <label for="razonamiento-balance-implicito">Balance implícito</label>
+                                    </div>
+                                    
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="razonamiento-retorico" name="tipoRazonamiento" value="retorico">
+                                        <label for="razonamiento-retorico">Retórico (sin estructura real)</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SECCIÓN 9: ERRORES DEL RAZONAMIENTO -->
+            <section class="form-section">
+                <h2 class="section-title"><i class="fas fa-times-circle"></i> 9. Errores del razonamiento</h2>
 
+                <!-- 9a. Falacias Formales (Silogismos) -->
+                <div class="collapsible">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <span>a. Falacias formales (silogismos)</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <div class="method-grid">
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="error-afirmacion-consecuente" name="erroresSilogismo" value="afirmacion_consecuente">
+                                        <label for="error-afirmacion-consecuente">
+                                            <strong>Afirmación del consecuente</strong><br>
+                                            <small style="font-size: 0.8em; color: #666;">Si P entonces Q; Q; por lo tanto P</small>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="error-negacion-antecedente" name="erroresSilogismo" value="negacion_antecedente">
+                                        <label for="error-negacion-antecedente">
+                                            <strong>Negación del antecedente</strong><br>
+                                            <small style="font-size: 0.8em; color: #666;">Si P entonces Q; no P; por lo tanto no Q</small>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="error-silogismo-disyuntivo" name="erroresSilogismo" value="silogismo_disyuntivo_falaz">
+                                        <label for="error-silogismo-disyuntivo">
+                                            <strong>Silogismo disyuntivo falaz</strong><br>
+                                            <small style="font-size: 0.8em; color: #666;">O P o Q; P; por lo tanto no Q (sin exclusión mutua)</small>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9b. Argumentos de atinencia (Falacias informales) -->
+                <div class="collapsible">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <span>b. Argumentos de atinencia (falacias informales)</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <!-- Primera fila de opciones principales -->
+                                <div class="method-grid">
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="argumento-ad-baculum" name="argumentosAtinencia" value="ad_baculum">
+                                        <label for="argumento-ad-baculum">
+                                            <strong>Ad baculum</strong><br>
+                                            <small style="font-size: 0.8em; color: #666;">Apelación a la fuerza o amenaza</small>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="argumento-ad-hominem" name="argumentosAtinencia" value="ad_hominem">
+                                        <label for="argumento-ad-hominem">
+                                            <strong>Ad hominem</strong><br>
+                                            <small style="font-size: 0.8em; color: #666;">Ataque a la persona, no al argumento</small>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="argumento-ad-ignorantiam" name="argumentosAtinencia" value="ad_ignorantiam">
+                                        <label for="argumento-ad-ignorantiam">
+                                            <strong>Ad ignorantiam</strong><br>
+                                            <small style="font-size: 0.8em; color: #666;">Afirmar algo porque no se ha probado lo contrario</small>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Segunda fila de opciones adicionales -->
+                                <div class="method-grid" style="margin-top: 15px;">
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="argumento-ad-misericordiam" name="argumentosAtinencia" value="ad_misericordiam">
+                                        <label for="argumento-ad-misericordiam">
+                                            <strong>Ad misericordiam</strong><br>
+                                            <small style="font-size: 0.8em; color: #666;">Apelación a la piedad o compasión</small>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="argumento-ad-populum" name="argumentosAtinencia" value="ad_populum">
+                                        <label for="argumento-ad-populum">
+                                            <strong>Ad populum</strong><br>
+                                            <small style="font-size: 0.8em; color: #666;">Apelación a la popularidad o emociones</small>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="argumento-ad-verecundiam" name="argumentosAtinencia" value="ad_verecundiam">
+                                        <label for="argumento-ad-verecundiam">
+                                            <strong>Ad verecundiam</strong><br>
+                                            <small style="font-size: 0.8em; color: #666;">Apelación a la autoridad inapropiada</small>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Tercera fila de opciones -->
+                                <div class="method-grid" style="margin-top: 15px;">
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="argumento-petitio-principii" name="argumentosAtinencia" value="petitio_principii">
+                                        <label for="argumento-petitio-principii">
+                                            <strong>Petitio principii</strong><br>
+                                            <small style="font-size: 0.8em; color: #666;">Razonamiento circular (usar conclusión como premisa)</small>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="argumento-causa-falsa" name="argumentosAtinencia" value="causa_falsa">
+                                        <label for="argumento-causa-falsa">
+                                            <strong>Causa falsa</strong><br>
+                                            <small style="font-size: 0.8em; color: #666;">Atribuir causalidad incorrectamente</small>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="argumento-ignoratio-elenchi" name="argumentosAtinencia" value="ignoratio_elenchi">
+                                        <label for="argumento-ignoratio-elenchi">
+                                            <strong>Ignoratio elenchi</strong><br>
+                                            <small style="font-size: 0.8em; color: #666;">Conclusión irrelevante al argumento</small>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9c. Argumentos de ambigüedad -->
+                <div class="collapsible">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <span>c. Argumentos de ambigüedad</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <div class="method-grid">
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="argumento-equivoco" name="argumentosAmbiguedad" value="equivoco">
+                                        <label for="argumento-equivoco">
+                                            <strong>Equívoco</strong><br>
+                                            <small style="font-size: 0.8em; color: #666;">Uso ambiguo de términos</small>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="argumento-anfibologia" name="argumentosAmbiguedad" value="anfibologia">
+                                        <label for="argumento-anfibologia">
+                                            <strong>Anfibología</strong><br>
+                                            <small style="font-size: 0.8em; color: #666;">Estructura gramatical ambigua</small>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="argumento-enfasis" name="argumentosAmbiguedad" value="enfasis">
+                                        <label for="argumento-enfasis">
+                                            <strong>Énfasis</strong><br>
+                                            <small style="font-size: 0.8em; color: #666;">Cambio de significado por énfasis</small>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="argumento-composicion" name="argumentosAmbiguedad" value="composicion">
+                                        <label for="argumento-composicion">
+                                            <strong>Composición</strong><br>
+                                            <small style="font-size: 0.8em; color: #666;">Atribuir al todo propiedades de las partes</small>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="argumento-division" name="argumentosAmbiguedad" value="division">
+                                        <label for="argumento-division">
+                                            <strong>División</strong><br>
+                                            <small style="font-size: 0.8em; color: #666;">Atribuir a las partes propiedades del todo</small>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 10: CAUSAL DE ARBITRARIEDAD -->
+            <section class="form-section">
+                <h2 class="section-title"><i class="fas fa-gavel"></i> 10. Causal de Arbitrariedad</h2>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <div class="method-grid">
+                            <!-- Primera fila -->
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="causal-falta-fundamentacion" name="causalArbitrariedad" value="falta_fundamentacion" onclick="toggleOpcionesFundamentacion(this)">
+                                <label for="causal-falta-fundamentacion">
+                                    <strong>Falta de fundamentación suficiente</strong><br>
+                                    <small style="font-size: 0.8em; color: #666;">Incluye afirmaciones dogmáticas, falta de fundamentación idónea o carencia de sustento</small>
+                                </label>
+                            </div>
+
+                            <div id="opcionesFundamentacionContainer" class="conditional-section">
+                                <div class="method-grid">
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="fundamentacion-dogmatica" name="opcionesFundamentacion" value="afirmaciones_dogmaticas">
+                                        <label for="fundamentacion-dogmatica">
+                                            <strong>Afirmaciones dogmáticas</strong><br>
+                                            <small style="font-size: 0.8em; color: #666;">Afirmaciones no fundadas o carentes de sustento</small>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="fundamentacion-insuficiente" name="opcionesFundamentacion" value="falta_fundamentacion_idonea">
+                                        <label for="fundamentacion-insuficiente">
+                                            <strong>Falta de fundamentación idónea</strong><br>
+                                            <small style="font-size: 0.8em; color: #666;">Fundamentación inadecuada para la decisión</small>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="fundamentacion-carencia" name="opcionesFundamentacion" value="carencia_sustento">
+                                        <label for="fundamentacion-carencia">
+                                            <strong>Carencia de sustento</strong><br>
+                                            <small style="font-size: 0.8em; color: #666;">Falta de referencia concreta a normativa o precedentes</small>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Segunda fila -->
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="causal-apartamiento" name="causalArbitrariedad" value="apartamiento_condiciones">
+                                <label for="causal-apartamiento">
+                                    <strong>Apartamiento de las condiciones de la causa</strong><br>
+                                    <small style="font-size: 0.8em; color: #666;">Decisión ajena a los términos del litigio planteado</small>
+                                </label>
+                            </div>
+
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="causal-valoracion" name="causalArbitrariedad" value="valoracion_hechos_prueba">
+                                <label for="causal-valoracion">
+                                    <strong>Valoración irracional de hechos y prueba</strong><br>
+                                    <small style="font-size: 0.8em; color: #666;">Apreciación manifiestamente errónea o irrazonable</small>
+                                </label>
+                            </div>
+
+                            <!-- Tercera fila -->
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="causal-defectos-extremos" name="causalArbitrariedad" value="defectos_extremos_conducentes">
+                                <label for="causal-defectos-extremos">
+                                    <strong>Defectos en consideración de extremos conducentes</strong><br>
+                                    <small style="font-size: 0.8em; color: #666;">Omisión o tratamiento inadecuado de aspectos relevantes</small>
+                                </label>
+                            </div>
+
+                            <!-- Cuarta fila -->
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="causal-defectos-normativa" name="causalArbitrariedad" value="defectos_fundamentacion_normativa" onclick="toggleOpcionesNormativa(this)">
+                                <label for="causal-defectos-normativa">
+                                    <strong>Defectos en fundamentación normativa</strong><br>
+                                    <small style="font-size: 0.8em; color: #666;">Interpretación o aplicación incorrecta de normas</small>
+                                </label>
+                            </div>
+
+                            <div id="opcionesNormativaContainer" class="conditional-section">
+                                <div class="method-grid">
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="normativa-interpretacion-erronea" name="opcionesNormativa" value="interpretacion_aplicacion_erronea">
+                                        <label for="normativa-interpretacion-erronea">
+                                            <strong>Interpretación o aplicación errónea</strong><br>
+                                            <small style="font-size: 0.8em; color: #666;">Error en interpretación o aplicación de norma</small>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" id="normativa-apartamiento" name="opcionesNormativa" value="apartamiento_omision_normativa">
+                                        <label for="normativa-apartamiento">
+                                            <strong>Apartamiento u omisión normativa</strong><br>
+                                            <small style="font-size: 0.8em; color: #666;">Inaplicación o aplicación incorrecta de norma aplicable</small>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quinta fila -->
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="causal-excesos-omisiones" name="causalArbitrariedad" value="excesos_omisiones_pronunciamiento">
+                                <label for="causal-excesos-omisiones">
+                                    <strong>Excesos u omisiones en pronunciamiento</strong><br>
+                                    <small style="font-size: 0.8em; color: #666;">Extralimitación o insuficiencia en la decisión</small>
+                                </label>
+                            </div>
+
+                            <!-- Sexta fila -->
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="causal-exceso-ritual" name="causalArbitrariedad" value="exceso_ritual_manifiesto">
+                                <label for="causal-exceso-ritual">
+                                    <strong>Exceso ritual manifiesto</strong><br>
+                                    <small style="font-size: 0.8em; color: #666;">Inobservancia grave de formas procesales esenciales</small>
+                                </label>
+                            </div>
+
+                            <!-- Séptima fila -->
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="causal-contradiccion" name="causalArbitrariedad" value="contradiccion">
+                                <label for="causal-contradiccion">
+                                    <strong>Contradicción en fundamentos</strong><br>
+                                    <small style="font-size: 0.8em; color: #666;">Razonamientos incompatibles entre sí</small>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Campo para detalles específicos -->
+                        <div class="form-group" style="margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--border-color);">
+                            <label for="detalleArbitrariedad">Detalles específicos de la arbitrariedad detectada:</label>
+                            <textarea id="detalleArbitrariedad" name="detalleArbitrariedad" class="form-control" rows="3" placeholder="Describa con precisión en qué consiste la arbitrariedad, citando considerandos o párrafos específicos del fallo..."></textarea>
+                            <div class="helper-text">Ej: "En el considerando 5°, el tribunal afirma X sin fundamentar, contradiciendo lo establecido en el considerando 3°..."</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SECCIÓN 11: OBSERVACIONES ADICIONALES -->
+            <section class="form-section">
+                <h2 class="section-title"><i class="fas fa-sticky-note"></i> 11. Observaciones adicionales</h2>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label for="observaciones">Notas, comentarios o observaciones relevantes</label>
+                        <textarea id="observaciones" name="observaciones" placeholder="Agregue cualquier observación adicional que considere relevante para el análisis del fallo..." rows="4"></textarea>
+                        <div class="helper-text">Espacio para anotaciones personales, conexiones con otros fallos, relevancia doctrinal, etc.</div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- BOTONES DE ACCIÓN -->
+            <div class="buttons-container">
+                <button type="button" class="btn btn-submit" onclick="guardarFallo()">
+                    <i class="fas fa-save"></i> Guardar Fallo
+                </button>
+                
+                <button type="button" class="btn btn-reset" onclick="resetForm()">
+                    <i class="fas fa-redo"></i> Limpiar Formulario
+                </button>
+                
+                <button type="button" class="btn btn-export" onclick="exportarACSV()">
+                    <i class="fas fa-file-export"></i> Exportar a CSV
+                </button>
+            </div>
+        </form>
+        
+        <footer class="footer">
+            <p>Sistema de Carga de Fallos Judiciales &copy; <span id="current-year"></span> | Análisis Jurisprudencial Sistematizado</p>
+            <p><i class="fas fa-info-circle"></i> Todos los campos marcados con * son obligatorios</p>
+        </footer>
+    </div>
+
+    <script>
+        // Función para mostrar/ocultar contenido colapsable
+        function toggleCollapsible(element) {
+            const content = element.nextElementSibling;
+            element.classList.toggle('active');
+            content.classList.toggle('active');
+        }
+        
+        // Mostrar/ocultar campo de disidencias
+        function toggleDisidencias(mostrar) {
+            const container = document.getElementById('disidenciasContainer');
+            if (mostrar) {
+                container.classList.add('active');
+            } else {
+                container.classList.remove('active');
+                // Limpiar el campo si se oculta
+                document.getElementById('detalleDisidencias').value = '';
+            }
+        }
+        
+        // Mostrar/ocultar campos de principios
+        function togglePrincipiosContainer(mostrar) {
+            const container = document.getElementById('principiosContainer');
+            if (mostrar) {
+                container.classList.add('active');
+            } else {
+                container.classList.remove('active');
+                // Limpiar los campos si se oculta
+                document.getElementById('principioA').value = '';
+                document.getElementById('principioB').value = '';
+                document.getElementById('customPrincipioA').value = '';
+                document.getElementById('customPrincipioB').value = '';
+                document.getElementById('customPrincipioAContainer').style.display = 'none';
+                document.getElementById('customPrincipioBContainer').style.display = 'none';
+            }
+        }
+        
+        // Mostrar/ocultar sección probatoria
+        function toggleProbatorio(mostrar) {
+            const container = document.getElementById('probatorioContainer');
+            const checkboxProbatorio = document.getElementById('problema-probatorio');
+            
+            if (mostrar && checkboxProbatorio.checked) {
+                container.classList.add('active');
+            } else {
+                container.classList.remove('active');
+                // Limpiar los campos si se oculta
+                document.querySelectorAll('#probatorioContainer input').forEach(input => {
+                    if (input.type === 'checkbox' || input.type === 'radio') {
+                        input.checked = false;
+                    }
+                });
+            }
+        }
+        
+        // Mostrar/ocultar opciones de fundamentación
+        function toggleOpcionesFundamentacion(checkbox) {
+            const container = document.getElementById('opcionesFundamentacionContainer');
+            if (checkbox.checked) {
+                container.classList.add('active');
+            } else {
+                container.classList.remove('active');
+                // Limpiar los checkboxes hijos
+                document.querySelectorAll('#opcionesFundamentacionContainer input[type="checkbox"]').forEach(cb => {
+                    cb.checked = false;
+                });
+            }
+        }
+        
+        // Mostrar/ocultar opciones de normativa
+        function toggleOpcionesNormativa(checkbox) {
+            const container = document.getElementById('opcionesNormativaContainer');
+            if (checkbox.checked) {
+                container.classList.add('active');
+            } else {
+                container.classList.remove('active');
+                // Limpiar los checkboxes hijos
+                document.querySelectorAll('#opcionesNormativaContainer input[type="checkbox"]').forEach(cb => {
+                    cb.checked = false;
+                });
+            }
+        }
+        
+        // Funciones para mostrar campos personalizados cuando se selecciona "Otro"
+        function toggleCustomMateria(select) {
+            const container = document.getElementById('customMateriaContainer');
+            container.style.display = select.value === 'otro' ? 'block' : 'none';
+            if (select.value !== 'otro') {
+                document.getElementById('customMateria').value = '';
+            }
+        }
+        
+        function toggleCustomSubtema(select) {
+            const container = document.getElementById('customSubtemaContainer');
+            container.style.display = select.value === 'otro' ? 'block' : 'none';
+            if (select.value !== 'otro') {
+                document.getElementById('customSubtema').value = '';
+            }
+        }
+        
+        function toggleCustomPrincipioA(select) {
+            const container = document.getElementById('customPrincipioAContainer');
+            container.style.display = select.value === 'otro' ? 'block' : 'none';
+            if (select.value !== 'otro') {
+                document.getElementById('customPrincipioA').value = '';
+            }
+        }
+        
+        function toggleCustomPrincipioB(select) {
+            const container = document.getElementById('customPrincipioBContainer');
+            container.style.display = select.value === 'otro' ? 'block' : 'none';
+            if (select.value !== 'otro') {
+                document.getElementById('customPrincipioB').value = '';
+            }
+        }
+        
+        // Validar que al menos un problema jurídico esté seleccionado
+        function validarProblemaJuridico() {
+            const checkboxes = document.querySelectorAll('input[name="problemaJuridico"]:checked');
+            return checkboxes.length > 0;
+        }
+        
+        // Recopilar todos los datos del formulario
+        function recopilarDatos() {
+            const datos = {
+                // Información básica
+                caratula: document.getElementById('caratula').value,
+                fallos: document.getElementById('fallos').value,
+                fecha: document.getElementById('fecha').value,
+                
+                // Composición del tribunal
+                integracion: document.getElementById('integracion').value,
+                voto: document.querySelector('input[name="voto"]:checked')?.value || '',
+                disidencias: document.getElementById('detalleDisidencias')?.value || '',
+                
+                // Tema jurídico
+                materia: obtenerValorConPersonalizado('materia', 'customMateria'),
+                subtema: obtenerValorConPersonalizado('subtema', 'customSubtema'),
+                
+                // Cuestión federal
+                cuestionFederal: document.getElementById('cuestioneFederal').value,
+                
+                // Tipo de desacuerdo
+                tipoDesacuerdo: obtenerCheckboxes('tipoDesacuerdo'),
+                
+                // Tipo de problema jurídico
+                problemaJuridico: obtenerCheckboxes('problemaJuridico'),
+                
+                // Sección probatoria (si aplica)
+                rolPrueba: document.querySelector('input[name="rolPrueba"]:checked')?.value || '',
+                tipoInferencias: obtenerCheckboxes('tipoInferencias'),
+                
+                // Método interpretativo
+                metodoInterpretativo: obtenerCheckboxes('metodoInterpretativo'),
+                
+                // Argumentos de ponderación
+                colisionPrincipios: document.querySelector('input[name="colisionPrincipios"]:checked')?.value || '',
+                principioA: obtenerValorConPersonalizado('principioA', 'customPrincipioA'),
+                principioB: obtenerValorConPersonalizado('principioB', 'customPrincipioB'),
+                estructuraPonderacion: obtenerCheckboxes('estructuraPonderacion'),
+                tipoRazonamiento: obtenerCheckboxes('tipoRazonamiento'),
+                
+                // Errores del razonamiento
+                erroresSilogismo: obtenerCheckboxes('erroresSilogismo'),
+                argumentosAtinencia: obtenerCheckboxes('argumentosAtinencia'),
+                argumentosAmbiguedad: obtenerCheckboxes('argumentosAmbiguedad'),
+                
+                // Causal de arbitrariedad
+                causalArbitrariedad: obtenerCheckboxes('causalArbitrariedad'),
+                opcionesFundamentacion: obtenerCheckboxes('opcionesFundamentacion'),
+                opcionesNormativa: obtenerCheckboxes('opcionesNormativa'),
+                
+                // Observaciones
+                observaciones: document.getElementById('observaciones').value,
+                
+                // Metadata
+                timestamp: new Date().toISOString(),
+                fechaRegistro: new Date().toLocaleString('es-AR')
+            };
+            
+            return datos;
+        }
+        
+        function obtenerValorConPersonalizado(selectId, customInputId) {
+            const select = document.getElementById(selectId);
+            if (!select) return '';
+            
+            if (select.value === 'otro') {
+                const customInput = document.getElementById(customInputId);
+                return customInput ? customInput.value : '';
+            }
+            return select.options[select.selectedIndex]?.text || '';
+        }
+        
+        function obtenerCheckboxes(nombre) {
+            const checkboxes = document.querySelectorAll(`input[name="${nombre}"]:checked`);
+            return Array.from(checkboxes).map(cb => cb.value).join('; ');
+        }
+        
+        // Función para guardar el fallo
+        function guardarFallo() {
+            // Validación básica
+            const caratula = document.getElementById('caratula').value;
+            const fecha = document.getElementById('fecha').value;
+            
+            if (!caratula || !fecha) {
+                showStatus('Por favor complete todos los campos obligatorios', 'error');
+                return;
+            }
+            
+            // Validar que se seleccione al menos un problema jurídico
+            if (!validarProblemaJuridico()) {
+                showStatus('Debe seleccionar al menos un tipo de problema jurídico', 'error');
+                return;
+            }
+            
+            // Validar campos condicionales
+            const votoDisidencias = document.getElementById('voto-disidencias').checked;
+            if (votoDisidencias && !document.getElementById('detalleDisidencias').value) {
+                showStatus('Debe detallar las disidencias', 'error');
+                return;
+            }
+            
+            const colisionSi = document.getElementById('colision-si').checked;
+            if (colisionSi) {
+                const principioA = obtenerValorConPersonalizado('principioA', 'customPrincipioA');
+                const principioB = obtenerValorConPersonalizado('principioB', 'customPrincipioB');
+                if (!principioA || !principioB) {
+                    showStatus('Debe especificar ambos principios cuando hay colisión', 'error');
+                    return;
+                }
+            }
+            
+            // Recopilar datos
+            const datos = recopilarDatos();
+            
+            console.log('Datos del fallo:', datos);
+            showStatus(`Fallo "${caratula}" procesado correctamente`, 'success');
+            
+            // Aquí es donde conectarías con Google Sheets o tu sistema de almacenamiento
+            // Por ahora solo mostramos un mensaje
+            setTimeout(() => {
+                alert('Fallo listo para guardar. Configure la conexión con Google Sheets siguiendo las instrucciones proporcionadas.');
+            }, 500);
+        }
+        
+        // Función para exportar a CSV
+        function exportarACSV() {
+            const datos = recopilarDatos();
+            
+            // Validar que haya datos básicos
+            if (!datos.caratula) {
+                showStatus('Complete al menos la carátula para exportar', 'error');
+                return;
+            }
+            
+            // Convertir a CSV
+            const csvRows = [];
+            
+            // Encabezados
+            const headers = Object.keys(datos);
+            csvRows.push(headers.map(h => `"${h}"`).join(','));
+            
+            // Valores
+            const values = headers.map(header => {
+                const val = datos[header];
+                // Escapar comas y comillas
+                return `"${String(val).replace(/"/g, '""')}"`;
+            });
+            csvRows.push(values.join(','));
+            
+            // Crear y descargar archivo
+            const csvString = csvRows.join('\n');
+            const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            
+            const fecha = new Date().toISOString().split('T')[0];
+            const nombreArchivo = `fallo_${datos.caratula.substring(0, 30).replace(/[^a-z0-9]/gi, '_')}_${fecha}.csv`;
+            a.setAttribute('href', url);
+            a.setAttribute('download', nombreArchivo);
+            a.click();
+            
+            showStatus('CSV descargado correctamente', 'success');
+        }
+        
+        // Función para mostrar mensajes de estado
+        function showStatus(message, type) {
+            const statusElement = document.getElementById('statusMessage');
+            statusElement.textContent = message;
+            statusElement.className = `status-message status-${type}`;
+            statusElement.style.display = 'block';
+            
+            // Ocultar después de 5 segundos
+            setTimeout(() => {
+                statusElement.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Función para limpiar el formulario
+        function resetForm() {
+            if (confirm('¿Está seguro de que desea limpiar todo el formulario? Se perderán todos los datos ingresados.')) {
+                document.getElementById('fallosForm').reset();
+                
+                // Ocultar todas las secciones condicionales
+                document.querySelectorAll('.conditional-section').forEach(el => {
+                    el.classList.remove('active');
+                });
+                
+                // Ocultar todos los campos personalizados
+                document.querySelectorAll('.custom-input').forEach(el => {
+                    el.style.display = 'none';
+                });
+                
+                // Cerrar todos los acordeones
+                document.querySelectorAll('.collapsible-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.querySelectorAll('.collapsible-header').forEach(header => {
+                    header.classList.remove('active');
+                });
+                
+                showStatus('Formulario limpiado correctamente', 'success');
+            }
+        }
+        
+        // Actualizar el año actual en el footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Inicializar fecha con la fecha actual
+        document.getElementById('fecha').valueAsDate = new Date();
+        
+        // Inicializar ocultando todos los campos personalizados
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.custom-input').forEach(el => {
+                el.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

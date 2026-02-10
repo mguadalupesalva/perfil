@@ -967,191 +967,146 @@
             <section class="form-section">
                 <h2 class="section-title"><i class="fas fa-times-circle"></i> 9. Errores del razonamiento</h2>
 
-                <!-- 9a. Falacias Formales (Silogismos) -->
-                <div class="collapsible">
-                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
-                        <span>a. Falacias formales (silogismos)</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="collapsible-content">
-                        <div class="form-grid">
-                            <div class="form-group full-width">
-                                <div class="method-grid">
-                                    <div class="checkbox-option">
-                                        <input type="checkbox" id="error-afirmacion-consecuente" name="erroresSilogismo" value="afirmacion_consecuente">
-                                        <label for="error-afirmacion-consecuente">
-                                            <strong>Afirmación del consecuente</strong><br>
-                                            <small style="font-size: 0.8em; color: #666;">Si P entonces Q; Q; por lo tanto P</small>
-                                        </label>
-                                    </div>
+                <div class="form-grid">
+                    <div class="form-group full-width">
 
-                                    <div class="checkbox-option">
-                                        <input type="checkbox" id="error-negacion-antecedente" name="erroresSilogismo" value="negacion_antecedente">
-                                        <label for="error-negacion-antecedente">
-                                            <strong>Negación del antecedente</strong><br>
-                                            <small style="font-size: 0.8em; color: #666;">Si P entonces Q; no P; por lo tanto no Q</small>
-                                        </label>
-                                    </div>
+                        <!-- Primera parte: Falacias formales simples -->
+                        <div style="margin-bottom: 15px;">
+                            <div class="options-container">
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="error-afirmacion-consecuente" name="erroresSilogismo" value="afirmacion_consecuente">
+                                    <label for="error-afirmacion-consecuente">Afirmación del consecuente</label>
+                                </div>
 
-                                    <div class="checkbox-option">
-                                        <input type="checkbox" id="error-silogismo-disyuntivo" name="erroresSilogismo" value="silogismo_disyuntivo_falaz">
-                                        <label for="error-silogismo-disyuntivo">
-                                            <strong>Silogismo disyuntivo falaz</strong><br>
-                                            <small style="font-size: 0.8em; color: #666;">O P o Q; P; por lo tanto no Q (sin exclusión mutua)</small>
-                                        </label>
-                                    </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="error-negacion-antecedente" name="erroresSilogismo" value="negacion_antecedente">
+                                    <label for="error-negacion-antecedente">Negación del antecedente</label>
+                                </div>
+
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="error-silogismo-disyuntivo" name="erroresSilogismo" value="silogismo_disyuntivo_falaz">
+                                    <label for="error-silogismo-disyuntivo">Silogismo disyuntivo falaz</label>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <!-- 9b. Argumentos de atinencia (Falacias informales) -->
-                <div class="collapsible">
-                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
-                        <span>b. Argumentos de atinencia (falacias informales)</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="collapsible-content">
-                        <div class="form-grid">
-                            <div class="form-group full-width">
-                                <!-- Primera fila de opciones principales -->
+                        <!-- Segunda parte: Argumentos de atinencia -->
+                        <div style="margin-bottom: 20px;">
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="argumentos-atinencia-principal" name="argumentosAtinenciaPrincipal" value="si" onclick="toggleArgumentosAtinencia(this)">
+                                <label for="argumentos-atinencia-principal">
+                                    <strong>Argumentos de atinencia</strong>
+                                </label>
+                            </div>
+
+                            <div id="argumentosAtinenciaContainer" class="conditional-section" style="display: none; margin-left: 25px; margin-top: 10px;">
                                 <div class="method-grid">
-                                    <div class="checkbox-option">
+                                    <!-- Fila 1 -->
+                                    <div class="checkbox-option" style="background: #f8f9fa;">
                                         <input type="checkbox" id="argumento-ad-baculum" name="argumentosAtinencia" value="ad_baculum">
-                                        <label for="argumento-ad-baculum">
-                                            <strong>Ad baculum</strong><br>
-                                            <small style="font-size: 0.8em; color: #666;">Apelación a la fuerza o amenaza</small>
-                                        </label>
+                                        <label for="argumento-ad-baculum"><strong>a)</strong> ad baculum</label>
                                     </div>
 
-                                    <div class="checkbox-option">
+                                    <div class="checkbox-option" style="background: #f8f9fa;">
                                         <input type="checkbox" id="argumento-ad-hominem" name="argumentosAtinencia" value="ad_hominem">
-                                        <label for="argumento-ad-hominem">
-                                            <strong>Ad hominem</strong><br>
-                                            <small style="font-size: 0.8em; color: #666;">Ataque a la persona, no al argumento</small>
-                                        </label>
+                                        <label for="argumento-ad-hominem"><strong>b)</strong> ad hominem</label>
                                     </div>
 
-                                    <div class="checkbox-option">
+                                    <div class="checkbox-option" style="background: #f8f9fa;">
                                         <input type="checkbox" id="argumento-ad-ignorantiam" name="argumentosAtinencia" value="ad_ignorantiam">
-                                        <label for="argumento-ad-ignorantiam">
-                                            <strong>Ad ignorantiam</strong><br>
-                                            <small style="font-size: 0.8em; color: #666;">Afirmar algo porque no se ha probado lo contrario</small>
-                                        </label>
+                                        <label for="argumento-ad-ignorantiam"><strong>c)</strong> ad ignorantiam</label>
                                     </div>
-                                </div>
 
-                                <!-- Segunda fila de opciones adicionales -->
-                                <div class="method-grid" style="margin-top: 15px;">
-                                    <div class="checkbox-option">
+                                    <!-- Fila 2 -->
+                                    <div class="checkbox-option" style="background: #f8f9fa;">
                                         <input type="checkbox" id="argumento-ad-misericordiam" name="argumentosAtinencia" value="ad_misericordiam">
-                                        <label for="argumento-ad-misericordiam">
-                                            <strong>Ad misericordiam</strong><br>
-                                            <small style="font-size: 0.8em; color: #666;">Apelación a la piedad o compasión</small>
-                                        </label>
+                                        <label for="argumento-ad-misericordiam"><strong>d)</strong> ad misericordiam</label>
                                     </div>
 
-                                    <div class="checkbox-option">
+                                    <div class="checkbox-option" style="background: #f8f9fa;">
                                         <input type="checkbox" id="argumento-ad-populum" name="argumentosAtinencia" value="ad_populum">
-                                        <label for="argumento-ad-populum">
-                                            <strong>Ad populum</strong><br>
-                                            <small style="font-size: 0.8em; color: #666;">Apelación a la popularidad o emociones</small>
-                                        </label>
+                                        <label for="argumento-ad-populum"><strong>e)</strong> ad populum</label>
                                     </div>
 
-                                    <div class="checkbox-option">
+                                    <div class="checkbox-option" style="background: #f8f9fa;">
                                         <input type="checkbox" id="argumento-ad-verecundiam" name="argumentosAtinencia" value="ad_verecundiam">
-                                        <label for="argumento-ad-verecundiam">
-                                            <strong>Ad verecundiam</strong><br>
-                                            <small style="font-size: 0.8em; color: #666;">Apelación a la autoridad inapropiada</small>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <!-- Tercera fila de opciones -->
-                                <div class="method-grid" style="margin-top: 15px;">
-                                    <div class="checkbox-option">
-                                        <input type="checkbox" id="argumento-petitio-principii" name="argumentosAtinencia" value="petitio_principii">
-                                        <label for="argumento-petitio-principii">
-                                            <strong>Petitio principii</strong><br>
-                                            <small style="font-size: 0.8em; color: #666;">Razonamiento circular (usar conclusión como premisa)</small>
-                                        </label>
+                                        <label for="argumento-ad-verecundiam"><strong>f)</strong> ad verecundiam</label>
                                     </div>
 
-                                    <div class="checkbox-option">
+                                    <!-- Fila 3 -->
+                                    <div class="checkbox-option" style="background: #f8f9fa;">
+                                        <input type="checkbox" id="argumento-de-accidente" name="argumentosAtinencia" value="de_accidente">
+                                        <label for="argumento-de-accidente"><strong>g)</strong> de accidente</label>
+                                    </div>
+
+                                    <div class="checkbox-option" style="background: #f8f9fa;">
+                                        <input type="checkbox" id="argumento-accidente-inverso" name="argumentosAtinencia" value="accidente_inverso">
+                                        <label for="argumento-accidente-inverso"><strong>h)</strong> del accidente inverso</label>
+                                    </div>
+
+                                    <div class="checkbox-option" style="background: #f8f9fa;">
                                         <input type="checkbox" id="argumento-causa-falsa" name="argumentosAtinencia" value="causa_falsa">
-                                        <label for="argumento-causa-falsa">
-                                            <strong>Causa falsa</strong><br>
-                                            <small style="font-size: 0.8em; color: #666;">Atribuir causalidad incorrectamente</small>
-                                        </label>
+                                        <label for="argumento-causa-falsa"><strong>i)</strong> causa falsa</label>
                                     </div>
 
-                                    <div class="checkbox-option">
+                                    <!-- Fila 4 -->
+                                    <div class="checkbox-option" style="background: #f8f9fa;">
+                                        <input type="checkbox" id="argumento-petitio-principii" name="argumentosAtinencia" value="petitio_principii">
+                                        <label for="argumento-petitio-principii"><strong>j)</strong> Petitio principii</label>
+                                    </div>
+
+                                    <div class="checkbox-option" style="background: #f8f9fa;">
+                                        <input type="checkbox" id="argumento-pregunta-compleja" name="argumentosAtinencia" value="pregunta_compleja">
+                                        <label for="argumento-pregunta-compleja"><strong>k)</strong> Pregunta compleja</label>
+                                    </div>
+
+                                    <div class="checkbox-option" style="background: #f8f9fa;">
                                         <input type="checkbox" id="argumento-ignoratio-elenchi" name="argumentosAtinencia" value="ignoratio_elenchi">
-                                        <label for="argumento-ignoratio-elenchi">
-                                            <strong>Ignoratio elenchi</strong><br>
-                                            <small style="font-size: 0.8em; color: #666;">Conclusión irrelevante al argumento</small>
-                                        </label>
+                                        <label for="argumento-ignoratio-elenchi"><strong>l)</strong> Ignoratio Elenchi</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <!-- 9c. Argumentos de ambigüedad -->
-                <div class="collapsible">
-                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
-                        <span>c. Argumentos de ambigüedad</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="collapsible-content">
-                        <div class="form-grid">
-                            <div class="form-group full-width">
+                        <!-- Tercera parte: Argumentos de ambigüedad -->
+                        <div style="margin-bottom: 5px;">
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="argumentos-ambiguedad-principal" name="argumentosAmbiguedadPrincipal" value="si" onclick="toggleArgumentosAmbiguedad(this)">
+                                <label for="argumentos-ambiguedad-principal">
+                                    <strong>Argumentos de ambigüedad</strong>
+                                </label>
+                            </div>
+
+                            <div id="argumentosAmbiguedadContainer" class="conditional-section" style="display: none; margin-left: 25px; margin-top: 10px;">
                                 <div class="method-grid">
-                                    <div class="checkbox-option">
+                                    <div class="checkbox-option" style="background: #f8f9fa;">
                                         <input type="checkbox" id="argumento-equivoco" name="argumentosAmbiguedad" value="equivoco">
-                                        <label for="argumento-equivoco">
-                                            <strong>Equívoco</strong><br>
-                                            <small style="font-size: 0.8em; color: #666;">Uso ambiguo de términos</small>
-                                        </label>
+                                        <label for="argumento-equivoco"><strong>a)</strong> equívoco</label>
                                     </div>
 
-                                    <div class="checkbox-option">
+                                    <div class="checkbox-option" style="background: #f8f9fa;">
                                         <input type="checkbox" id="argumento-anfibologia" name="argumentosAmbiguedad" value="anfibologia">
-                                        <label for="argumento-anfibologia">
-                                            <strong>Anfibología</strong><br>
-                                            <small style="font-size: 0.8em; color: #666;">Estructura gramatical ambigua</small>
-                                        </label>
+                                        <label for="argumento-anfibologia"><strong>b)</strong> anfibología</label>
                                     </div>
 
-                                    <div class="checkbox-option">
+                                    <div class="checkbox-option" style="background: #f8f9fa;">
                                         <input type="checkbox" id="argumento-enfasis" name="argumentosAmbiguedad" value="enfasis">
-                                        <label for="argumento-enfasis">
-                                            <strong>Énfasis</strong><br>
-                                            <small style="font-size: 0.8em; color: #666;">Cambio de significado por énfasis</small>
-                                        </label>
+                                        <label for="argumento-enfasis"><strong>c)</strong> énfasis</label>
                                     </div>
 
-                                    <div class="checkbox-option">
+                                    <div class="checkbox-option" style="background: #f8f9fa;">
                                         <input type="checkbox" id="argumento-composicion" name="argumentosAmbiguedad" value="composicion">
-                                        <label for="argumento-composicion">
-                                            <strong>Composición</strong><br>
-                                            <small style="font-size: 0.8em; color: #666;">Atribuir al todo propiedades de las partes</small>
-                                        </label>
+                                        <label for="argumento-composicion"><strong>d)</strong> composición</label>
                                     </div>
 
-                                    <div class="checkbox-option">
+                                    <div class="checkbox-option" style="background: #f8f9fa;">
                                         <input type="checkbox" id="argumento-division" name="argumentosAmbiguedad" value="division">
-                                        <label for="argumento-division">
-                                            <strong>División</strong><br>
-                                            <small style="font-size: 0.8em; color: #666;">Atribuir a las partes propiedades del todo</small>
-                                        </label>
+                                        <label for="argumento-division"><strong>e)</strong> división</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </section>
@@ -1159,135 +1114,135 @@
             <!-- SECCIÓN 10: CAUSAL DE ARBITRARIEDAD -->
             <section class="form-section">
                 <h2 class="section-title"><i class="fas fa-gavel"></i> 10. Causal de Arbitrariedad</h2>
+
                 <div class="form-grid">
                     <div class="form-group full-width">
-                        <div class="method-grid">
-                            <!-- Primera fila -->
+
+                        <!-- 1. Falta de fundamentación suficiente -->
+                        <div style="margin-bottom: 20px;">
                             <div class="checkbox-option">
-                                <input type="checkbox" id="causal-falta-fundamentacion" name="causalArbitrariedad" value="falta_fundamentacion" onclick="toggleOpcionesFundamentacion(this)">
+                                <input type="checkbox" id="causal-falta-fundamentacion" name="causalArbitrariedad" value="falta_fundamentacion" onclick="toggleFaltaFundamentacion(this)">
                                 <label for="causal-falta-fundamentacion">
-                                    <strong>Falta de fundamentación suficiente</strong><br>
-                                    <small style="font-size: 0.8em; color: #666;">Incluye afirmaciones dogmáticas, falta de fundamentación idónea o carencia de sustento</small>
+                                    <strong>Falta de fundamentación suficiente</strong>
                                 </label>
                             </div>
 
-                            <div id="opcionesFundamentacionContainer" class="conditional-section">
-                                <div class="method-grid">
-                                    <div class="checkbox-option">
+                            <!-- Opciones específicas (aparecen al seleccionar el checkbox) -->
+                            <div id="faltaFundamentacionContainer" class="conditional-section" style="display: none; margin-left: 25px; margin-top: 10px;">
+                                <div class="options-container" style="grid-template-columns: 1fr;">
+                                    <div class="checkbox-option" style="background: #f8f9fa;">
                                         <input type="checkbox" id="fundamentacion-dogmatica" name="opcionesFundamentacion" value="afirmaciones_dogmaticas">
                                         <label for="fundamentacion-dogmatica">
-                                            <strong>Afirmaciones dogmáticas</strong><br>
-                                            <small style="font-size: 0.8em; color: #666;">Afirmaciones no fundadas o carentes de sustento</small>
+                                            <strong>a)</strong> afirmaciones dogmáticas o no fundadas
                                         </label>
                                     </div>
 
-                                    <div class="checkbox-option">
+                                    <div class="checkbox-option" style="background: #f8f9fa;">
                                         <input type="checkbox" id="fundamentacion-insuficiente" name="opcionesFundamentacion" value="falta_fundamentacion_idonea">
                                         <label for="fundamentacion-insuficiente">
-                                            <strong>Falta de fundamentación idónea</strong><br>
-                                            <small style="font-size: 0.8em; color: #666;">Fundamentación inadecuada para la decisión</small>
+                                            <strong>b)</strong> falta de fundamentación idónea o no suficiente
                                         </label>
                                     </div>
 
-                                    <div class="checkbox-option">
+                                    <div class="checkbox-option" style="background: #f8f9fa;">
                                         <input type="checkbox" id="fundamentacion-carencia" name="opcionesFundamentacion" value="carencia_sustento">
                                         <label for="fundamentacion-carencia">
-                                            <strong>Carencia de sustento</strong><br>
-                                            <small style="font-size: 0.8em; color: #666;">Falta de referencia concreta a normativa o precedentes</small>
+                                            <strong>c)</strong> carencia de sustento o referencia concreta
                                         </label>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- Segunda fila -->
+                        <!-- 2. Apartamiento de las condiciones de la causa -->
+                        <div style="margin-bottom: 15px;">
                             <div class="checkbox-option">
                                 <input type="checkbox" id="causal-apartamiento" name="causalArbitrariedad" value="apartamiento_condiciones">
                                 <label for="causal-apartamiento">
-                                    <strong>Apartamiento de las condiciones de la causa</strong><br>
-                                    <small style="font-size: 0.8em; color: #666;">Decisión ajena a los términos del litigio planteado</small>
+                                    <strong>Apartamiento de las condiciones de la causa</strong>
                                 </label>
                             </div>
+                        </div>
 
+                        <!-- 3. Valoración de las circunstancias de hecho y prueba -->
+                        <div style="margin-bottom: 15px;">
                             <div class="checkbox-option">
                                 <input type="checkbox" id="causal-valoracion" name="causalArbitrariedad" value="valoracion_hechos_prueba">
                                 <label for="causal-valoracion">
-                                    <strong>Valoración irracional de hechos y prueba</strong><br>
-                                    <small style="font-size: 0.8em; color: #666;">Apreciación manifiestamente errónea o irrazonable</small>
+                                    <strong>Valoración de las circunstancias de hecho y prueba</strong>
                                 </label>
                             </div>
+                        </div>
 
-                            <!-- Tercera fila -->
+                        <!-- 4. Defectos en la consideración de extremos conducentes -->
+                        <div style="margin-bottom: 15px;">
                             <div class="checkbox-option">
                                 <input type="checkbox" id="causal-defectos-extremos" name="causalArbitrariedad" value="defectos_extremos_conducentes">
                                 <label for="causal-defectos-extremos">
-                                    <strong>Defectos en consideración de extremos conducentes</strong><br>
-                                    <small style="font-size: 0.8em; color: #666;">Omisión o tratamiento inadecuado de aspectos relevantes</small>
+                                    <strong>Defectos en la consideración de extremos conducentes</strong>
                                 </label>
                             </div>
+                        </div>
 
-                            <!-- Cuarta fila -->
+                        <!-- 5. Defectos en la fundamentación normativa -->
+                        <div style="margin-bottom: 20px;">
                             <div class="checkbox-option">
-                                <input type="checkbox" id="causal-defectos-normativa" name="causalArbitrariedad" value="defectos_fundamentacion_normativa" onclick="toggleOpcionesNormativa(this)">
+                                <input type="checkbox" id="causal-defectos-normativa" name="causalArbitrariedad" value="defectos_fundamentacion_normativa" onclick="toggleDefectosNormativa(this)">
                                 <label for="causal-defectos-normativa">
-                                    <strong>Defectos en fundamentación normativa</strong><br>
-                                    <small style="font-size: 0.8em; color: #666;">Interpretación o aplicación incorrecta de normas</small>
+                                    <strong>Defectos en la fundamentación normativa</strong>
                                 </label>
                             </div>
 
-                            <div id="opcionesNormativaContainer" class="conditional-section">
-                                <div class="method-grid">
-                                    <div class="checkbox-option">
+                            <!-- Opciones específicas (aparecen al seleccionar el checkbox) -->
+                            <div id="defectosNormativaContainer" class="conditional-section" style="display: none; margin-left: 25px; margin-top: 10px;">
+                                <div class="options-container" style="grid-template-columns: 1fr;">
+                                    <div class="checkbox-option" style="background: #f8f9fa;">
                                         <input type="checkbox" id="normativa-interpretacion-erronea" name="opcionesNormativa" value="interpretacion_aplicacion_erronea">
                                         <label for="normativa-interpretacion-erronea">
-                                            <strong>Interpretación o aplicación errónea</strong><br>
-                                            <small style="font-size: 0.8em; color: #666;">Error en interpretación o aplicación de norma</small>
+                                            <strong>a)</strong> interpretación o aplicación errónea de la norma
                                         </label>
                                     </div>
 
-                                    <div class="checkbox-option">
+                                    <div class="checkbox-option" style="background: #f8f9fa;">
                                         <input type="checkbox" id="normativa-apartamiento" name="opcionesNormativa" value="apartamiento_omision_normativa">
                                         <label for="normativa-apartamiento">
-                                            <strong>Apartamiento u omisión normativa</strong><br>
-                                            <small style="font-size: 0.8em; color: #666;">Inaplicación o aplicación incorrecta de norma aplicable</small>
+                                            <strong>b)</strong> apartamiento u omisión normativa
                                         </label>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- Quinta fila -->
+                        <!-- 6. Excesos u omisiones en el pronunciamiento -->
+                        <div style="margin-bottom: 15px;">
                             <div class="checkbox-option">
                                 <input type="checkbox" id="causal-excesos-omisiones" name="causalArbitrariedad" value="excesos_omisiones_pronunciamiento">
                                 <label for="causal-excesos-omisiones">
-                                    <strong>Excesos u omisiones en pronunciamiento</strong><br>
-                                    <small style="font-size: 0.8em; color: #666;">Extralimitación o insuficiencia en la decisión</small>
+                                    <strong>Excesos u omisiones en el pronunciamiento</strong>
                                 </label>
                             </div>
+                        </div>
 
-                            <!-- Sexta fila -->
+                        <!-- 7. Exceso ritual manifiesto -->
+                        <div style="margin-bottom: 15px;">
                             <div class="checkbox-option">
                                 <input type="checkbox" id="causal-exceso-ritual" name="causalArbitrariedad" value="exceso_ritual_manifiesto">
                                 <label for="causal-exceso-ritual">
-                                    <strong>Exceso ritual manifiesto</strong><br>
-                                    <small style="font-size: 0.8em; color: #666;">Inobservancia grave de formas procesales esenciales</small>
+                                    <strong>Exceso ritual manifiesto</strong>
                                 </label>
                             </div>
+                        </div>
 
-                            <!-- Séptima fila -->
+                        <!-- 8. Contradicción -->
+                        <div style="margin-bottom: 5px;">
                             <div class="checkbox-option">
                                 <input type="checkbox" id="causal-contradiccion" name="causalArbitrariedad" value="contradiccion">
                                 <label for="causal-contradiccion">
-                                    <strong>Contradicción en fundamentos</strong><br>
-                                    <small style="font-size: 0.8em; color: #666;">Razonamientos incompatibles entre sí</small>
+                                    <strong>Contradicción</strong>
                                 </label>
                             </div>
                         </div>
 
-                        <!-- Campo para detalles específicos -->
-                        <div class="form-group" style="margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--border-color);">
-                            <label for="detalleArbitrariedad">Detalles específicos de la arbitrariedad detectada:</label>
-                            <textarea id="detalleArbitrariedad" name="detalleArbitrariedad" class="form-control" rows="3" placeholder="Describa con precisión en qué consiste la arbitrariedad, citando considerandos o párrafos específicos del fallo..."></textarea>
-                            <div class="helper-text">Ej: "En el considerando 5°, el tribunal afirma X sin fundamentar, contradiciendo lo establecido en el considerando 3°..."</div>
-                        </div>
                     </div>
                 </div>
             </section>
@@ -1448,6 +1403,46 @@
             return checkboxes.length > 0;
         }
         
+        function toggleFaltaFundamentacion(checkbox) {
+        const container = document.getElementById('faltaFundamentacionContainer');
+        if (checkbox.checked) {
+            container.style.display = 'block';
+        } else {
+            container.style.display = 'none';
+            // Limpiar los checkboxes hijos
+            document.querySelectorAll('#faltaFundamentacionContainer input[type="checkbox"]').forEach(cb => {
+                cb.checked = false;
+            });
+        }
+    }
+    
+    function toggleDefectosNormativa(checkbox) {
+        const container = document.getElementById('defectosNormativaContainer');
+        if (checkbox.checked) {
+            container.style.display = 'block';
+        } else {
+            container.style.display = 'none';
+            // Limpiar los checkboxes hijos
+            document.querySelectorAll('#defectosNormativaContainer input[type="checkbox"]').forEach(cb => {
+                cb.checked = false;
+            });
+        }
+    }
+    
+    // Inicializar si hay valores guardados
+    document.addEventListener('DOMContentLoaded', function() {
+        // Verificar si algún checkbox principal está marcado y mostrar sus opciones
+        const faltaFundamentacion = document.getElementById('causal-falta-fundamentacion');
+        if (faltaFundamentacion && faltaFundamentacion.checked) {
+            document.getElementById('faltaFundamentacionContainer').style.display = 'block';
+        }
+        
+        const defectosNormativa = document.getElementById('causal-defectos-normativa');
+        if (defectosNormativa && defectosNormativa.checked) {
+            document.getElementById('defectosNormativaContainer').style.display = 'block';
+        }
+    });
+        
         // Recopilar todos los datos del formulario
         function recopilarDatos() {
             const datos = {
@@ -1508,6 +1503,48 @@
             
             return datos;
         }
+        
+        // Funciones para mostrar/ocultar las opciones específicas del punto 9
+    
+    function toggleArgumentosAtinencia(checkbox) {
+        const container = document.getElementById('argumentosAtinenciaContainer');
+        if (checkbox.checked) {
+            container.style.display = 'block';
+        } else {
+            container.style.display = 'none';
+            // Limpiar todos los checkboxes de argumentos de atinencia
+            document.querySelectorAll('#argumentosAtinenciaContainer input[type="checkbox"]').forEach(cb => {
+                cb.checked = false;
+            });
+        }
+    }
+    
+    function toggleArgumentosAmbiguedad(checkbox) {
+        const container = document.getElementById('argumentosAmbiguedadContainer');
+        if (checkbox.checked) {
+            container.style.display = 'block';
+        } else {
+            container.style.display = 'none';
+            // Limpiar todos los checkboxes de argumentos de ambigüedad
+            document.querySelectorAll('#argumentosAmbiguedadContainer input[type="checkbox"]').forEach(cb => {
+                cb.checked = false;
+            });
+        }
+    }
+    
+    // Inicializar si hay valores guardados
+    document.addEventListener('DOMContentLoaded', function() {
+        // Verificar si algún checkbox principal está marcado y mostrar sus opciones
+        const argumentosAtinencia = document.getElementById('argumentos-atinencia-principal');
+        if (argumentosAtinencia && argumentosAtinencia.checked) {
+            document.getElementById('argumentosAtinenciaContainer').style.display = 'block';
+        }
+        
+        const argumentosAmbiguedad = document.getElementById('argumentos-ambiguedad-principal');
+        if (argumentosAmbiguedad && argumentosAmbiguedad.checked) {
+            document.getElementById('argumentosAmbiguedadContainer').style.display = 'block';
+        }
+    });
         
         function obtenerValorConPersonalizado(selectId, customInputId) {
             const select = document.getElementById(selectId);
